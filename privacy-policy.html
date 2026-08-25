@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Privacy Policy — Spencheck</title>
+<meta name="description" content="Spencheck's privacy policy: what data the app touches, where it's stored, and what — if anything — ever leaves your phone." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --indigo:#2C5CE0; --indigo-soft:#EEF2FF;
+    --base:#F7F8FC; --surface:#FFFFFF;
+    --text-primary:#0F172A; --text-secondary:#475569; --text-muted:#94A3B8;
+    --border:#E2E8F0;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--base); color:var(--text-primary);
+    font-family:'Inter',system-ui,sans-serif; line-height:1.65;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:56px 20px 96px;}
+  a{color:var(--indigo);}
+  .brand{display:flex; align-items:center; gap:10px; margin-bottom:32px; text-decoration:none;}
+  .brand img{width:28px; height:28px;}
+  .brand span{font-family:'Sora',sans-serif; font-weight:800; font-size:18px; color:var(--text-primary);}
+  h1{font-family:'Sora',sans-serif; font-weight:800; font-size:32px; margin:0 0 8px;}
+  .meta{color:var(--text-muted); font-size:14px; margin-bottom:28px;}
+  .intro{font-size:16px; color:var(--text-secondary); margin-bottom:36px;}
+  h2{
+    font-family:'Sora',sans-serif; font-weight:700; font-size:19px;
+    margin:36px 0 14px; padding-bottom:10px; border-bottom:1px solid var(--border);
+  }
+  p{font-size:15px; color:var(--text-secondary); margin:0 0 14px; white-space:pre-line;}
+  .contact-box{
+    background:var(--indigo-soft); border:1px solid rgba(44,92,224,.15);
+    border-radius:16px; padding:20px 22px; font-size:15px; color:var(--text-primary);
+  }
+  .contact-box p{margin:4px 0; color:var(--text-primary);}
+  footer{margin-top:48px; padding-top:20px; border-top:1px solid var(--border); font-size:13px; color:var(--text-muted);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="brand" href="index.html">
+    <img src="spenchecklogo.svg" alt="" />
+    <span>Spencheck</span>
+  </a>
+
+  <h1>Privacy Policy for Spencheck</h1>
+  <div class="meta">Effective date: August 25, 2026</div>
+  <p class="intro">Spencheck is built to work entirely on your device. This page explains exactly what data the app touches, where it's stored, and what — if anything — ever leaves your phone.</p>
+
+  <h2>What stays on your device</h2>
+  <p>Everything you enter — expenses, categories, budgets, credit cards, lending records, wallets, income, savings goals, tags, subscriptions, loans, and investments — is stored locally and protected by AES-256 SQLCipher encryption. None of it is sent anywhere unless you explicitly turn on Cloud backup.</p>
+  <p>SMS auto-detection (Android only): the app reads bank/UPI debit-alert messages on-device to suggest expenses. The message text itself is never stored or uploaded — only the amount, merchant name, and date the app extracts from it, and only after you accept or the app auto-logs a repeat merchant. You can grant or revoke SMS permission at any time from your phone's system settings.</p>
+  <p>Receipt scanning uses Google ML Kit's on-device text recognition — a photo you take is processed on your phone and never uploaded anywhere.</p>
+  <p>The chat assistant answers common commands (adding an expense, checking your budget, lending status, and more) instantly on-device — nothing is sent anywhere for these. If you optionally add your own Gemini or ChatGPT API key in Account &gt; Cloud AI provider, open-ended questions you type are sent to that provider's servers to generate a reply, under their own privacy policy, not ours. With no key set, chat never sends anything off your phone.</p>
+  <p>If you pick a contact to log who you lent money to, the app reads only that one contact's name and phone number via your phone's native contact picker — it never scans or lists your full contact book. This data is used strictly on-device and is never uploaded, shared, or stored on our servers.</p>
+  <p>A PIN or biometric app-lock, and any saved sign-in credentials for fingerprint unlock, are stored securely in your device's hardware keystore.</p>
+
+  <h2>Third parties we share data with</h2>
+  <p>Spencheck does not sell or share your data with advertisers, data brokers, or analytics networks. Data only ever reaches these third parties, and only for the purpose stated:
+
+• Google Firebase (Authentication, Firestore) — used for sign-in and optional Cloud backup, both described below. Governed by Google's Privacy Policy.
+
+• Google Gemini or OpenAI ChatGPT — only if you add your own API key in Account &gt; Cloud AI provider, and only the open-ended chat message you type at that moment. Governed by that provider's own privacy policy, not ours.</p>
+
+  <h2>What Cloud backup sends (only if you turn it on)</h2>
+  <p>Cloud backup is off by default. If you sign in and turn it on, a copy of your categories, expenses, lending records, budgets, and credit cards is stored in Google Firebase (Firestore), tied to your account. Wallets, income, savings goals, tags, subscriptions, loans, investments, and chat history currently stay device-only even with backup on — they are not included in this cloud copy.</p>
+  <p>Signing in uses Firebase Authentication (email/password or Google Sign-In). We only receive what Firebase/Google provide for sign-in — your email address and, for Google Sign-In, your name and profile photo if you choose that method.</p>
+  <p>You can turn Cloud backup off, or delete your account entirely, from Account → Cloud backup / Delete account at any time.</p>
+
+  <h2>What we don't do</h2>
+  <p>No ads, no ad-tracking SDKs, no selling or sharing your data with third parties, and no reading of your bank account directly — Spencheck never connects to your bank; SMS detection only reads the text of messages already on your phone.</p>
+
+  <h2>Data retention and deletion</h2>
+  <p>Local data (everything described above) stays on your device for as long as the app is installed. You can delete individual entries at any time from within the app, and uninstalling the app permanently deletes all locally stored data.</p>
+  <p>If you signed in and used Cloud backup, that copy is retained in Firestore until you delete it yourself. Account → Delete account permanently removes, in order: your Firestore backup data, your Firebase Authentication account, and every local table on the device — this cannot be undone. Turning Cloud backup off (without deleting your account) stops future syncs but does not retroactively delete the existing Firestore copy — use Delete account for that.</p>
+  <h2>Changes to this policy</h2>
+  <p>We may update this Privacy Policy from time to time. Changes will be posted on this page and reflected in the "Effective date" above.</p>
+
+  <h2>Contact us</h2>
+  <div class="contact-box">
+    <p>Questions, suggestions, or privacy-related inquiries about this policy or your data — contact the developer:</p>
+    <p><strong>Developer:</strong> Gokul Narayana Maddala</p>
+    <p><strong>Address:</strong> Nellore, Andhra Pradesh, India</p>
+    <p><strong>Email:</strong> <a href="mailto:mgokulnarayana@gmail.com">mgokulnarayana@gmail.com</a></p>
+  </div>
+
+  <footer>&copy; 2026 Spencheck. Your data stays on your device.</footer>
+</div>
+</body>
+</html>
