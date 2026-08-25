@@ -252,7 +252,7 @@ ul { list-style: none; }
   margin-left: auto;
 }
 
-.nav-links li a {
+.nav-links li a:not(.btn) {
   font-family: 'Sora', sans-serif;
   font-size: 14px;
   font-weight: 600;
@@ -262,8 +262,8 @@ ul { list-style: none; }
   transition: all var(--transition);
   text-decoration: none;
 }
-.nav-links li a:hover,
-.nav-links li a.active {
+.nav-links li a:not(.btn):hover,
+.nav-links li a.active:not(.btn) {
   color: var(--indigo);
   background: var(--indigo-soft);
 }
