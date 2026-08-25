@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="spencheckApp">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spencheck — Track Your Spending, Smarter</title>
+  <meta name="description" content="Spencheck is the all-in-one personal finance app for Indians. Track expenses, set budgets, manage credit cards, split bills, and grow your savings — all in one place." />
+
+  <!-- Google Fonts: Sora + Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- AngularJS 1.8.3 + ngRoute -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular-route.min.js"></script>
+
+  <!-- Global Stylesheet -->
+  <link rel="stylesheet" href="styles.css?v=2" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" ng-controller="NavController">
+    <div class="nav-container">
+      <a href="#!/" class="nav-logo">
+        <img src="spenchecklogo.svg" alt="Spencheck" class="nav-logo-icon" />
+        <span class="logo-text">Spencheck</span>
+      </a>
+
+      <button class="nav-toggle" ng-click="menuOpen = !menuOpen" aria-label="Toggle menu">
+        <span class="hamburger" ng-class="{'open': menuOpen}">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+
+      <ul class="nav-links" ng-class="{'nav-open': menuOpen}">
+        <li><a href="#!/" ng-click="menuOpen=false" ng-class="{'active': isActive('/')}">Home</a></li>
+        <li><a href="#!/features" ng-click="menuOpen=false" ng-class="{'active': isActive('/features')}">Features</a></li>
+        <li><a href="#!/pricing" ng-click="menuOpen=false" ng-class="{'active': isActive('/pricing')}">Pricing</a></li>
+        <li><a href="#!/faq" ng-click="menuOpen=false" ng-class="{'active': isActive('/faq')}">FAQ</a></li>
+        <li class="nav-cta-item">
+          <a href="#!/download" class="btn btn-primary nav-cta" ng-click="menuOpen=false">Download Free</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===== ROUTER VIEW ===== -->
+  <main>
+    <div ng-view></div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#!/" class="footer-logo-wrap">
+            <img src="spenchecklogo.svg" alt="Spencheck" class="footer-logo-icon" />
+            <span class="footer-logo-text">Spencheck</span>
+          </a>
+          <p class="footer-tagline">Track your spending, smarter.</p>
+          <p class="footer-sub">A personal finance app built for India — completely private, fully offline-first, and yours.</p>
+        </div>
+
+        <div class="footer-links-grid">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <ul>
+              <li><a href="#!/features">All Features</a></li>
+              <li><a href="#!/features">Expense Tracking</a></li>
+              <li><a href="#!/features">Budgets &amp; Goals</a></li>
+              <li><a href="#!/features">Reports</a></li>
+              <li><a href="#!/pricing">Pricing</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>More</h4>
+            <ul>
+              <li><a href="#!/features">AI Assistant</a></li>
+              <li><a href="#!/features">Lending Tracker</a></li>
+              <li><a href="#!/features">Investments</a></li>
+              <li><a href="#!/faq">FAQ</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Download</h4>
+            <ul>
+              <li><a href="#!/download">Android</a></li>
+              <li><a href="#!/download">iOS</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 Spencheck. All rights reserved. Your data stays on your device.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App JS -->
+  <script src="app.js"></script>
+</body>
+</html>

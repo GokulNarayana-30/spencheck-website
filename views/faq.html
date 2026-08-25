@@ -1,0 +1,65 @@
+<!-- =====================================================
+     FAQ PAGE VIEW — faq.html
+     ===================================================== -->
+
+<!-- Hero -->
+<section class="faq-hero">
+  <div class="container">
+    <div class="section-label">Frequently asked questions</div>
+    <h1 class="section-title">Got questions? We have answers.</h1>
+    <p class="section-subtitle" style="margin:16px auto 0; max-width:540px; color:var(--text-secondary);">
+      Everything you need to know about Spencheck — from basic how-tos to privacy details and advanced features.
+    </p>
+  </div>
+</section>
+
+<!-- FAQ Layout -->
+<div class="container">
+  <div class="faq-layout">
+
+    <!-- Sidebar: category filter -->
+    <aside class="faq-sidebar">
+      <div class="faq-sidebar-title">Browse by topic</div>
+      <button class="faq-cat-btn" ng-repeat="cat in categories"
+        ng-class="{'active': activeCategory === cat.id}"
+        ng-click="setCategory(cat.id)">
+        <span>{{cat.icon}}</span>
+        <span>{{cat.label}}</span>
+      </button>
+      <div style="margin-top:24px; padding:16px; background:var(--indigo-soft); border-radius:16px; border:1px solid rgba(44,92,224,.15);">
+        <div style="font-family:'Sora',sans-serif; font-size:13px; font-weight:700; color:var(--indigo); margin-bottom:6px;">Still have questions?</div>
+        <p style="font-size:12px; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">Check the in-app Privacy Policy and Terms of Service, or browse the detailed screen documentation.</p>
+        <a href="#!/features" style="font-family:'Sora',sans-serif; font-size:12px; font-weight:600; color:var(--indigo);">Explore all features →</a>
+      </div>
+    </aside>
+
+    <!-- Main: accordion sections -->
+    <div class="faq-main">
+      <div class="faq-section" ng-repeat="section in visibleSections()">
+        <div class="faq-section-title">
+          <span>{{section.icon}}</span>
+          <span>{{section.title}}</span>
+        </div>
+
+        <div class="faq-item" ng-repeat="item in section.items" ng-class="{'open': item.open}">
+          <button class="faq-question" ng-click="toggle(item)" id="faq-q-{{$parent.$index}}-{{$index}}">
+            <span>{{item.q}}</span>
+            <span class="faq-chevron">▾</span>
+          </button>
+          <div class="faq-answer" id="faq-a-{{$parent.$index}}-{{$index}}">
+            <div class="faq-answer-inner">{{item.a}}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA at bottom of FAQ -->
+      <div style="margin-top:48px; padding:32px; background:var(--indigo-soft); border-radius:24px; border:1px solid rgba(44,92,224,.15); text-align:center;">
+        <div style="font-size:28px; margin-bottom:12px;">📱</div>
+        <div style="font-family:'Sora',sans-serif; font-size:20px; font-weight:700; color:var(--text-primary); margin-bottom:8px;">Still curious? Try it yourself — free.</div>
+        <p style="font-size:14px; color:var(--text-secondary); margin-bottom:24px; max-width:420px; margin-left:auto; margin-right:auto; line-height:1.7;">The best way to understand Spencheck is to use it. Download for free, no account required.</p>
+        <a href="#!/download" class="btn btn-primary">⬇ Download Spencheck</a>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,222 @@
+<!-- =====================================================
+     HOME PAGE VIEW — home.html
+     ===================================================== -->
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+
+      <!-- Left: Copy -->
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Free &bull; Offline-first &bull; Built for India
+        </div>
+
+        <h1 class="hero-title">
+          Your money,<br>
+          finally <span class="highlight">under control</span>
+        </h1>
+
+        <p class="hero-desc">
+          Spencheck is the all-in-one personal finance app that tracks every rupee, keeps you on budget, and tells you exactly where your money went — without sending your data anywhere.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#!/download" class="btn btn-primary btn-lg">
+            ⬇ Download Free
+          </a>
+          <a href="#!/features" class="btn btn-outline btn-lg">
+            See All Features →
+          </a>
+        </div>
+
+        <div class="hero-trust">
+          <span class="trust-item"><span class="check">✓</span> No account needed</span>
+          <span class="sep">·</span>
+          <span class="trust-item"><span class="check">✓</span> No ads ever</span>
+          <span class="sep">·</span>
+          <span class="trust-item"><span class="check">✓</span> 100% free</span>
+        </div>
+      </div>
+
+      <!-- Right: Phone Mockup -->
+      <div class="hero-visual">
+        <div class="phone-mockup-glow"></div>
+        <div class="phone-mockup">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+
+            <!-- Hero stat card -->
+            <div class="phone-stat-card">
+              <div class="phone-stat-label">Spent this month</div>
+              <div class="phone-stat-amount">₹18,420</div>
+              <div class="phone-progress-bar">
+                <div class="phone-progress-fill"></div>
+              </div>
+              <div class="phone-progress-label">₹6,580 left of ₹25,000 budget &bull; On track 📈</div>
+            </div>
+
+            <!-- Quick stats row -->
+            <div class="phone-row">
+              <div class="phone-chip">
+                <div class="phone-chip-label">Savings</div>
+                <div class="phone-chip-val">₹4,200</div>
+              </div>
+              <div class="phone-chip">
+                <div class="phone-chip-label">Owed to you</div>
+                <div class="phone-chip-val">₹1,500</div>
+              </div>
+              <div class="phone-chip">
+                <div class="phone-chip-label">Card due</div>
+                <div class="phone-chip-val danger">₹8,200</div>
+              </div>
+            </div>
+
+            <!-- Recent expenses -->
+            <div class="phone-list-item">
+              <div class="phone-list-left">
+                <div class="phone-list-dot" style="background:#E8F5E9;">🍔</div>
+                <div>
+                  <div class="phone-list-name">Swiggy</div>
+                  <div class="phone-list-cat">Food &bull; UPI</div>
+                </div>
+              </div>
+              <div class="phone-list-amount">−₹340</div>
+            </div>
+
+            <div class="phone-list-item">
+              <div class="phone-list-left">
+                <div class="phone-list-dot" style="background:#E3F2FD;">🚌</div>
+                <div>
+                  <div class="phone-list-name">Ola</div>
+                  <div class="phone-list-cat">Transport &bull; UPI</div>
+                </div>
+              </div>
+              <div class="phone-list-amount">−₹185</div>
+            </div>
+
+            <div class="phone-list-item">
+              <div class="phone-list-left">
+                <div class="phone-list-dot" style="background:#FFF8E1;">🛒</div>
+                <div>
+                  <div class="phone-list-name">BigBasket</div>
+                  <div class="phone-list-cat">Shopping &bull; Card</div>
+                </div>
+              </div>
+              <div class="phone-list-amount">−₹1,240</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── HIGHLIGHTS STRIP ── -->
+<section class="highlights">
+  <div class="container">
+    <div class="highlights-grid">
+      <div class="highlight-item" ng-repeat="h in highlights">
+        <div class="highlight-icon">{{h.icon}}</div>
+        <div class="highlight-label">{{h.label}}</div>
+        <div class="highlight-sub">{{h.sub}}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES PREVIEW ── -->
+<section class="section features-preview">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-label">What Spencheck does</div>
+      <h2 class="section-title">Everything your wallet needs</h2>
+      <p class="section-subtitle">From logging a cup of chai to tracking your home loan EMIs — Spencheck handles it all without complexity.</p>
+    </div>
+
+    <div class="feature-cards-grid">
+      <div class="feature-card" ng-repeat="f in features">
+        <span class="fc-icon">{{f.icon}}</span>
+        <div class="fc-title">{{f.title}}</div>
+        <p class="fc-desc">{{f.desc}}</p>
+        <a class="fc-link" href="{{f.link}}">Learn more →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section how-it-works">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-label">Getting started</div>
+      <h2 class="section-title">Up and running in 2 minutes</h2>
+      <p class="section-subtitle">No onboarding course, no complicated setup. Just download and start.</p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card" ng-repeat="s in steps">
+        <div class="step-number">{{s.num}}</div>
+        <div class="step-title">{{s.title}}</div>
+        <p class="step-desc">{{s.desc}}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TRUST & PRIVACY ── -->
+<section class="trust-section">
+  <div class="container">
+    <div class="trust-inner">
+
+      <div class="trust-content">
+        <div class="section-label">Privacy first</div>
+        <h2 class="section-title">Your money data belongs to you.</h2>
+        <p class="section-subtitle">Most apps monetise your financial data. Spencheck doesn't. Everything stays on your device, in a local database that only you control.</p>
+
+        <div class="trust-list">
+          <div class="trust-item-row" ng-repeat="t in trustPoints">
+            <div class="trust-item-icon">{{t.icon}}</div>
+            <div class="trust-item-text">
+              <strong>{{t.label}}</strong>
+              <span>{{t.desc}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="trust-visual">
+        <div class="trust-stat-card">
+          <div class="tscard-number success">100%</div>
+          <div class="tscard-label">Local storage by default</div>
+        </div>
+        <div class="trust-stat-card">
+          <div class="tscard-number indigo">0</div>
+          <div class="tscard-label">Ads in the app</div>
+        </div>
+        <div class="trust-stat-card">
+          <div class="tscard-number">0</div>
+          <div class="tscard-label">Third-party trackers</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA BANNER ── -->
+<section class="cta-banner">
+  <div class="container">
+    <div class="section-label" style="color:rgba(255,255,255,0.85); background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2);">Start today</div>
+    <h2 class="section-title" style="color:white; margin-top:8px;">Ready to take control of your money?</h2>
+    <p class="section-subtitle" style="color:rgba(255,255,255,0.72);">Download Spencheck free. No account, no credit card, no catch.</p>
+    <div class="cta-banner-actions">
+      <a href="#!/download" class="btn btn-ghost btn-lg">⬇ Download for Android</a>
+      <a href="#!/features" class="btn btn-ghost btn-lg">Explore All Features</a>
+    </div>
+  </div>
+</section>

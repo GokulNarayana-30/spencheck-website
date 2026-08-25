@@ -1,0 +1,128 @@
+<!-- =====================================================
+     DOWNLOAD PAGE VIEW — download.html
+     ===================================================== -->
+
+<!-- Hero -->
+<section class="download-hero">
+  <div class="container">
+    <div class="section-label">Get Spencheck</div>
+    <h1 class="section-title">Download free — takes 30 seconds</h1>
+    <p class="section-subtitle" style="margin:16px auto 0; max-width:500px; color:var(--text-secondary);">
+      No account required to get started. Install, open, and log your first expense in under a minute.
+    </p>
+
+    <div class="download-platforms">
+      <div class="download-card" ng-repeat="p in platforms">
+        <div class="dlc-icon">{{p.icon}}</div>
+        <div class="dlc-title">{{p.name}}</div>
+        <p class="dlc-sub">{{p.desc}}</p>
+        <div class="dlc-badge" ng-class="p.badgeClass">{{p.badge}}</div>
+        <a href="#" class="btn btn-primary" style="width:100%; justify-content:center;">{{p.btn}}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Requirements -->
+<section class="section-sm" style="background:var(--surface); border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:40px;">
+      <div class="section-label">Requirements</div>
+      <h2 class="section-title" style="font-size:28px;">What you'll need</h2>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:20px; max-width:760px; margin:0 auto;">
+      <div class="fmg-card" ng-repeat="r in requirements" style="text-align:center;">
+        <div class="fmg-icon" style="font-size:32px;">{{r.icon}}</div>
+        <div class="fmg-title" style="font-size:14px;">{{r.label}}</div>
+        <p class="fmg-desc" style="font-size:12px;">{{r.sub}}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Android-only features callout -->
+<section class="section-sm" style="background:var(--base); border-top:1px solid var(--border);">
+  <div class="container" style="max-width:820px;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+
+      <div style="background:var(--surface); border-radius:24px; padding:32px; border:1.5px solid var(--border);">
+        <div style="font-size:36px; margin-bottom:16px;">🤖</div>
+        <div style="font-family:'Sora',sans-serif; font-size:18px; font-weight:700; margin-bottom:12px; color:var(--text-primary);">Android exclusive features</div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--text-secondary);">
+            <span style="color:var(--success); flex-shrink:0;">✓</span>
+            <span>SMS expense auto-detection from bank alerts</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--text-secondary);">
+            <span style="color:var(--success); flex-shrink:0;">✓</span>
+            <span>Home screen widget with quick-add preset buttons</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--text-secondary);">
+            <span style="color:var(--success); flex-shrink:0;">✓</span>
+            <span>Real-time UPI app list (PhonePe, GPay, Paytm, etc.)</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--text-secondary);">
+            <span style="color:var(--success); flex-shrink:0;">✓</span>
+            <span>Background SMS notification for new bank transactions</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--surface); border-radius:24px; padding:32px; border:1.5px solid var(--border);">
+        <div style="font-size:36px; margin-bottom:16px;">🍎</div>
+        <div style="font-family:'Sora',sans-serif; font-size:18px; font-weight:700; margin-bottom:12px; color:var(--text-primary);">Available on iOS</div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--text-secondary);">
+            <span style="color:var(--success); flex-shrink:0;">✓</span>
+            <span>Full expense tracking, budgets, and goals</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--text-secondary);">
+            <span style="color:var(--success); flex-shrink:0;">✓</span>
+            <span>Credit card manager, lending tracker</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--text-secondary);">
+            <span style="color:var(--success); flex-shrink:0;">✓</span>
+            <span>Reports, insights, and PDF/CSV export</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--text-secondary);">
+            <span style="color:var(--success); flex-shrink:0;">✓</span>
+            <span>AI chat assistant (offline + optional API key)</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--text-secondary);">
+            <span style="color:var(--success); flex-shrink:0;">✓</span>
+            <span>Face ID biometric lock, cloud backup</span>
+          </div>
+        </div>
+        <div style="margin-top:16px; padding:12px; background:var(--warning-soft); border-radius:12px; border:1px solid rgba(247,144,9,.2);">
+          <div style="font-size:12px; color:var(--warning); font-weight:600; font-family:'Sora',sans-serif;">⏳ iOS version — coming soon</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Privacy reminder -->
+<section class="section-sm" style="background:linear-gradient(135deg,#0F172A 0%,#1A2744 100%); color:white;">
+  <div class="container" style="text-align:center; max-width:640px;">
+    <div style="font-size:40px; margin-bottom:16px;">🔒</div>
+    <h2 style="font-family:'Sora',sans-serif; font-size:24px; font-weight:700; color:white; margin-bottom:12px;">Your data never leaves your phone</h2>
+    <p style="font-size:15px; color:rgba(255,255,255,0.65); line-height:1.75; margin-bottom:28px;">
+      Spencheck is completely offline by default. No account is needed. No server receives your transactions, amounts, or merchant names. Everything stays in a local database on your device — unless you explicitly enable cloud backup.
+    </p>
+    <div style="display:flex; justify-content:center; gap:32px; flex-wrap:wrap;">
+      <div style="text-align:center;">
+        <div style="font-family:'Sora',sans-serif; font-size:28px; font-weight:800; color:#12B76A;">100%</div>
+        <div style="font-size:12px; color:rgba(255,255,255,0.5);">Local by default</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:'Sora',sans-serif; font-size:28px; font-weight:800; color:#6E8CFF;">0</div>
+        <div style="font-size:12px; color:rgba(255,255,255,0.5);">Third-party trackers</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:'Sora',sans-serif; font-size:28px; font-weight:800; color:white;">₹0</div>
+        <div style="font-size:12px; color:rgba(255,255,255,0.5);">Cost to use</div>
+      </div>
+    </div>
+  </div>
+</section>

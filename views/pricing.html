@@ -1,0 +1,136 @@
+<!-- =====================================================
+     PRICING PAGE VIEW — pricing.html
+     ===================================================== -->
+
+<!-- Hero -->
+<section class="pricing-hero">
+  <div class="container">
+    <div class="section-label">Pricing</div>
+    <h1 class="section-title">Free. Forever. No strings.</h1>
+    <p class="section-subtitle" style="margin:16px auto 0; max-width:520px; color:var(--text-secondary);">
+      Spencheck doesn't have a pricing model. Every feature is free. No subscription, no freemium tier, no upgrade prompts. Just the app.
+    </p>
+  </div>
+</section>
+
+<!-- Pricing Cards -->
+<section class="section-sm">
+  <div class="container">
+    <div class="pricing-grid">
+
+      <!-- Free Plan (everything) -->
+      <div class="pricing-card featured" style="position:relative;">
+        <div class="pricing-badge">Everything Included</div>
+        <div class="pc-name">Spencheck</div>
+        <div class="pc-price">₹0</div>
+        <div class="pc-period">Forever free · No credit card</div>
+        <p class="pc-tagline">Every feature, every screen, every update — free with no expiry date.</p>
+        <div class="pc-divider"></div>
+        <div class="pc-features">
+          <div class="pc-feature" ng-repeat="f in freeFeatures">
+            <span class="check">✓</span>
+            <span>{{f}}</span>
+          </div>
+        </div>
+        <a href="#!/download" class="btn" style="width:100%; justify-content:center; background:white; color:var(--indigo); font-family:'Sora',sans-serif;">Download Free →</a>
+      </div>
+
+      <!-- Optional / Bring-your-own -->
+      <div class="pricing-card" style="display:flex; flex-direction:column;">
+        <div class="pc-name">Bring Your Own</div>
+        <div class="pc-price" style="font-size:36px; color:var(--text-secondary);">Optional</div>
+        <div class="pc-period">Pay-per-use at your provider's rate</div>
+        <p class="pc-tagline" style="color:var(--text-secondary);">For open-ended AI questions beyond Spencheck's built-in commands, you can connect your own Gemini or ChatGPT API key.</p>
+        <div class="pc-divider"></div>
+        <div class="pc-features" style="flex:1;">
+          <div class="pc-feature" ng-repeat="f in optionalFeatures">
+            <span class="check">✓</span>
+            <span style="color:var(--text-secondary);">{{f}}</span>
+          </div>
+          <div class="pc-feature" style="margin-top:8px; background:var(--warning-soft); border-radius:12px; padding:12px; border:1px solid rgba(247,144,9,.2);">
+            <span style="color:var(--warning); font-size:16px;">ℹ</span>
+            <span style="color:var(--text-secondary);">Without a key, all standard commands (add expense, summaries, lending, budgets) still work fully offline — no key needed.</span>
+          </div>
+        </div>
+        <div style="margin-top:24px; padding:16px; background:var(--base); border-radius:16px; border:1px solid var(--border);">
+          <div style="font-family:'Sora',sans-serif; font-size:13px; font-weight:700; color:var(--text-primary); margin-bottom:6px;">Supported providers</div>
+          <div style="display:flex; gap:10px;">
+            <div style="flex:1; background:var(--surface); border-radius:10px; padding:10px; text-align:center; border:1px solid var(--border);">
+              <div style="font-family:'Sora',sans-serif; font-size:13px; font-weight:700; color:var(--text-primary);">Google Gemini</div>
+              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">gemini.google.com</div>
+            </div>
+            <div style="flex:1; background:var(--surface); border-radius:10px; padding:10px; text-align:center; border:1px solid var(--border);">
+              <div style="font-family:'Sora',sans-serif; font-size:13px; font-weight:700; color:var(--text-primary);">ChatGPT</div>
+              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">platform.openai.com</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Why Free section -->
+<section class="section" style="background:var(--surface); border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-label">Why free?</div>
+      <h2 class="section-title">Because managing money shouldn't cost money</h2>
+      <p class="section-subtitle">Spencheck is a personal project built for people who want full control over their finances without paying a subscription for the privilege of seeing their own data.</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:56px;">
+      <div class="fmg-card">
+        <div class="fmg-icon">🚫</div>
+        <div class="fmg-title">No investors to please</div>
+        <p class="fmg-desc">There's no venture capital, no growth targets, and no pressure to monetise your data to satisfy investors.</p>
+      </div>
+      <div class="fmg-card">
+        <div class="fmg-icon">🔒</div>
+        <div class="fmg-title">No ads to serve</div>
+        <p class="fmg-desc">Spencheck has no ad network, no tracking SDK, and no third-party analytics. Your usage behaviour isn't anyone's product.</p>
+      </div>
+      <div class="fmg-card">
+        <div class="fmg-icon">📱</div>
+        <div class="fmg-title">Built for real people</div>
+        <p class="fmg-desc">Spencheck was built to be genuinely useful for everyday Indian personal finance — not to generate recurring subscription revenue.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mini FAQ on pricing -->
+<section class="section-sm" style="background:var(--base); border-top:1px solid var(--border);">
+  <div class="container" style="max-width:720px;">
+    <div class="text-center" style="margin-bottom:40px;">
+      <div class="section-label">Quick answers</div>
+      <h2 class="section-title" style="font-size:28px;">Pricing FAQ</h2>
+    </div>
+    <div class="faq-main">
+      <div class="faq-item" ng-repeat="f in faqs" ng-class="{'open': f.open}">
+        <button class="faq-question" ng-click="f.open = !f.open">
+          <span>{{f.q}}</span>
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">{{f.a}}</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:36px;">
+      <a href="#!/faq" class="btn btn-outline">See all FAQ →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <div class="container">
+    <h2 class="section-title" style="color:white;">Ready? It's free.</h2>
+    <p class="section-subtitle" style="color:rgba(255,255,255,0.72);">No signup required. No credit card. No expiry.</p>
+    <div class="cta-banner-actions">
+      <a href="#!/download" class="btn btn-ghost btn-lg">⬇ Download Spencheck</a>
+    </div>
+  </div>
+</section>
