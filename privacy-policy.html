@@ -54,10 +54,11 @@
 
   <h2>What stays on your device</h2>
   <p>Everything you enter — expenses, categories, budgets, credit cards, lending records, wallets, income, savings goals, tags, subscriptions, loans, and investments — is stored locally and protected by AES-256 SQLCipher encryption. None of it is sent anywhere unless you explicitly turn on Cloud backup.</p>
+  <p>Android only: by default, the app blocks screenshots, screen recording, and hides its content from the recent-apps preview, since your balances and card details are sensitive. You can turn this off from Account &gt; Security &amp; backup if you want to take a screenshot or record your screen yourself.</p>
   <p>SMS auto-detection (Android only): the app reads bank/UPI debit-alert messages on-device to suggest expenses. The message text itself is never stored or uploaded — only the amount, merchant name, and date the app extracts from it, and only after you accept or the app auto-logs a repeat merchant. You can grant or revoke SMS permission at any time from your phone's system settings.</p>
   <p>Receipt scanning uses Google ML Kit's on-device text recognition — a photo you take is processed on your phone and never uploaded anywhere.</p>
   <p>The chat assistant answers common commands (adding an expense, checking your budget, lending status, and more) instantly on-device — nothing is sent anywhere for these. If you optionally add your own Gemini or ChatGPT API key in Account &gt; Cloud AI provider, open-ended questions you type are sent to that provider's servers to generate a reply, under their own privacy policy, not ours. With no key set, chat never sends anything off your phone.</p>
-  <p>If you pick a contact to log who you lent money to, the app reads only that one contact's name and phone number via your phone's native contact picker — it never scans or lists your full contact book. This data is used strictly on-device and is never uploaded, shared, or stored on our servers.</p>
+  <p>If you pick a contact to log who you lent money to, the app reads only that one contact's name via your phone's native contact picker — it never requests broad access to your contacts and never scans or lists your full contact book. You can type a phone number in yourself if you want to save one. This data is used strictly on-device and is never uploaded, shared, or stored on our servers.</p>
   <p>A PIN or biometric app-lock, and any saved sign-in credentials for fingerprint unlock, are stored securely in your device's hardware keystore.</p>
 
   <h2>Third parties we share data with</h2>
@@ -68,7 +69,7 @@
 • Google Gemini or OpenAI ChatGPT — only if you add your own API key in Account &gt; Cloud AI provider, and only the open-ended chat message you type at that moment. Governed by that provider's own privacy policy, not ours.</p>
 
   <h2>What Cloud backup sends (only if you turn it on)</h2>
-  <p>Cloud backup is off by default. If you sign in and turn it on, a copy of your categories, expenses, lending records, budgets, and credit cards is stored in Google Firebase (Firestore), tied to your account. Wallets, income, savings goals, tags, subscriptions, loans, investments, and chat history currently stay device-only even with backup on — they are not included in this cloud copy.</p>
+  <p>Cloud backup is off by default. If you sign in and turn it on, a copy of your categories, expenses, lending records, budgets, credit cards, wallets, savings goals, subscriptions, loans, investments, income, recurring expenses, tags, chat history, and auto-categorisation keywords is stored in Google Firebase (Firestore), tied to your account. SMS scan history (which messages have already been reviewed) always stays device-only, even with backup on.</p>
   <p>Signing in uses Firebase Authentication (email/password or Google Sign-In). We only receive what Firebase/Google provide for sign-in — your email address and, for Google Sign-In, your name and profile photo if you choose that method.</p>
   <p>You can turn Cloud backup off, or delete your account entirely, from Account → Cloud backup / Delete account at any time.</p>
 
