@@ -49,7 +49,7 @@
   </a>
 
   <h1>Privacy Policy for Spencheck</h1>
-  <div class="meta">Effective date: August 25, 2026</div>
+  <div class="meta">Effective date: August 28, 2026</div>
   <p class="intro">Spencheck is built to work entirely on your device. This page explains exactly what data the app touches, where it's stored, and what — if anything — ever leaves your phone.</p>
 
   <h2>What stays on your device</h2>
@@ -64,14 +64,22 @@
   <h2>Third parties we share data with</h2>
   <p>Spencheck does not sell or share your data with advertisers, data brokers, or analytics networks. Data only ever reaches these third parties, and only for the purpose stated:
 
-• Google Firebase (Authentication, Firestore) — used for sign-in and optional Cloud backup, both described below. Governed by Google's Privacy Policy.
+• Google Firebase (Authentication, Firestore, Cloud Messaging) — used for sign-in, optional Cloud backup, wallet sharing, and push notifications, all described below. Governed by Google's Privacy Policy.
 
-• Google Gemini or OpenAI ChatGPT — only if you add your own API key in Account &gt; Cloud AI provider, and only the open-ended chat message you type at that moment. Governed by that provider's own privacy policy, not ours.</p>
+• Google Gemini or OpenAI ChatGPT — only if you add your own API key in Account &gt; Cloud AI provider, and only the open-ended chat message you type at that moment. Governed by that provider's own privacy policy, not ours.
+
+• Formspree — only if you use Account &gt; Help &amp; feedback to send us a message. The message text, and your email address if you choose to include one, is sent to Formspree so we can read (and optionally reply to) it. Governed by Formspree's own privacy policy, not ours.</p>
 
   <h2>What Cloud backup sends (only if you turn it on)</h2>
   <p>Cloud backup is off by default. If you sign in and turn it on, a copy of your categories, expenses, lending records, budgets, credit cards, wallets, savings goals, subscriptions, loans, investments, income, recurring expenses, tags, chat history, and auto-categorisation keywords is stored in Google Firebase (Firestore), tied to your account. SMS scan history (which messages have already been reviewed) always stays device-only, even with backup on.</p>
   <p>Signing in uses Firebase Authentication (email/password or Google Sign-In). We only receive what Firebase/Google provide for sign-in — your email address and, for Google Sign-In, your name and profile photo if you choose that method.</p>
   <p>You can turn Cloud backup off, or delete your account entirely, from Account → Cloud backup / Delete account at any time.</p>
+
+  <h2>Push notifications</h2>
+  <p>If you sign in, this device's Firebase Cloud Messaging token is stored under your account in Firestore so a push notification (e.g. a wallet shared with you updating) can be delivered to this device. Signing out clears this token. This is separate from the reminder notifications Spencheck schedules entirely on-device (budget/payday/card-due alerts) — those never involve Firebase at all.</p>
+
+  <h2>Wallet sharing</h2>
+  <p>Off by default, and separate from Cloud backup above. If you mark a wallet as shared and add another person's email, that wallet's data is stored in a shared Firestore location visible to any account signed in with an email you added — not just your own account. Remove an email from the share list (or turn sharing off) to revoke that person's access.</p>
 
   <h2>What we don't do</h2>
   <p>No ads, no ad-tracking SDKs, no selling or sharing your data with third parties, and no reading of your bank account directly — Spencheck never connects to your bank; SMS detection only reads the text of messages already on your phone.</p>
