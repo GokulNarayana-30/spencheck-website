@@ -84,9 +84,15 @@
   <h2>What we don't do</h2>
   <p>No ads, no ad-tracking SDKs, no selling or sharing your data with third parties, and no reading of your bank account directly — Spencheck never connects to your bank; SMS detection only reads the text of messages already on your phone.</p>
 
-  <h2>Data retention and deletion</h2>
+  <h2 id="delete-account">Data retention and deletion</h2>
   <p>Local data (everything described above) stays on your device for as long as the app is installed. You can delete individual entries at any time from within the app, and uninstalling the app permanently deletes all locally stored data.</p>
-  <p>If you signed in and used Cloud backup, that copy is retained in Firestore until you delete it yourself. Account → Delete account permanently removes, in order: your Firestore backup data, your Firebase Authentication account, and every local table on the device — this cannot be undone. Turning Cloud backup off (without deleting your account) stops future syncs but does not retroactively delete the existing Firestore copy — use Delete account for that.</p>
+  <p>If you signed in and used Cloud backup, that copy is retained in Firestore until you delete it yourself. Turning Cloud backup off (without deleting your account) stops future syncs but does not retroactively delete the existing Firestore copy — use Delete account, below, for that.</p>
+  <p><strong>To request deletion of your Spencheck account and all associated data:</strong></p>
+  <p>1. Open the Spencheck app and sign in.<br>
+  2. Go to the Account tab (bottom navigation).<br>
+  3. Scroll down and tap "Delete account".<br>
+  4. Confirm the deletion when prompted.</p>
+  <p>This permanently removes, in order: your Firestore backup data, your Firebase Authentication account, and every local table on the device. This cannot be undone and cannot be requested any other way (there is no separate web form) — you must have the app installed and be signed in to complete it, since deletion requires an authenticated request.</p>
   <h2>Changes to this policy</h2>
   <p>We may update this Privacy Policy from time to time. Changes will be posted on this page and reflected in the "Effective date" above.</p>
 
