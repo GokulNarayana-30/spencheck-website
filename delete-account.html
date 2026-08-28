@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Delete Your Account — Spencheck</title>
-<meta name="description" content="How to permanently delete your Spencheck account and all associated data, from the app or by email." />
+<meta name="description" content="Permanently delete your Spencheck account and all associated data, right from this page." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -13,45 +13,60 @@
     --indigo:#2C5CE0; --indigo-soft:#EEF2FF;
     --base:#F7F8FC; --surface:#FFFFFF;
     --text-primary:#0F172A; --text-secondary:#475569; --text-muted:#94A3B8;
-    --border:#E2E8F0; --danger:#DC2626; --danger-soft:#FEF2F2;
+    --border:#E2E8F0; --danger:#DC2626; --danger-soft:#FEF2F2; --success:#16A34A; --success-soft:#F0FDF4;
   }
   *{box-sizing:border-box;}
   body{
     margin:0; background:var(--base); color:var(--text-primary);
     font-family:'Inter',system-ui,sans-serif; line-height:1.65;
   }
-  .wrap{max-width:760px; margin:0 auto; padding:56px 20px 96px;}
+  .wrap{max-width:640px; margin:0 auto; padding:56px 20px 96px;}
   a{color:var(--indigo);}
   .brand{display:flex; align-items:center; gap:10px; margin-bottom:32px; text-decoration:none;}
   .brand img{width:28px; height:28px;}
   .brand span{font-family:'Sora',sans-serif; font-weight:800; font-size:18px; color:var(--text-primary);}
   h1{font-family:'Sora',sans-serif; font-weight:800; font-size:32px; margin:0 0 8px;}
-  .intro{font-size:16px; color:var(--text-secondary); margin:0 0 36px;}
-  h2{
-    font-family:'Sora',sans-serif; font-weight:700; font-size:19px;
-    margin:36px 0 14px; padding-bottom:10px; border-bottom:1px solid var(--border);
-  }
+  .intro{font-size:16px; color:var(--text-secondary); margin:0 0 28px;}
+  h2{font-family:'Sora',sans-serif; font-weight:700; font-size:17px; margin:0 0 14px;}
   p{font-size:15px; color:var(--text-secondary); margin:0 0 14px;}
-  ol{margin:0 0 14px; padding-left:22px; color:var(--text-secondary); font-size:15px;}
-  ol li{margin-bottom:6px;}
   .card{
     background:var(--surface); border:1px solid var(--border);
-    border-radius:16px; padding:22px 24px; margin-bottom:20px;
+    border-radius:16px; padding:24px; margin-bottom:20px;
   }
+  .warn{
+    background:var(--danger-soft); border:1px solid rgba(220,38,38,.2);
+    border-radius:12px; padding:14px 18px; font-size:14px; color:var(--danger); margin-bottom:24px;
+  }
+  label{display:block; font-size:13px; font-weight:600; color:var(--text-primary); margin:0 0 6px;}
+  input[type=email], input[type=password], input[type=text]{
+    width:100%; padding:11px 14px; border:1px solid var(--border); border-radius:10px;
+    font-size:15px; font-family:inherit; margin-bottom:16px; background:var(--base);
+  }
+  input:focus{outline:2px solid var(--indigo); outline-offset:1px;}
+  button{
+    font-family:inherit; font-size:15px; font-weight:600; border:none; border-radius:10px;
+    padding:12px 20px; cursor:pointer; width:100%;
+  }
+  button:disabled{opacity:.55; cursor:not-allowed;}
+  .btn-primary{background:var(--indigo); color:#fff;}
+  .btn-danger{background:var(--danger); color:#fff;}
+  .btn-outline{background:var(--surface); color:var(--text-primary); border:1px solid var(--border) !important;}
+  .row-gap{margin-top:10px;}
+  .divider{display:flex; align-items:center; gap:12px; margin:18px 0; color:var(--text-muted); font-size:13px;}
+  .divider::before, .divider::after{content:""; flex:1; height:1px; background:var(--border);}
+  .status{font-size:14px; margin:14px 0 0; padding:12px 14px; border-radius:10px; display:none;}
+  .status.error{display:block; background:var(--danger-soft); color:var(--danger);}
+  .status.info{display:block; background:var(--indigo-soft); color:var(--indigo);}
+  .status.success{display:block; background:var(--success-soft); color:var(--success);}
+  .checkbox-row{display:flex; align-items:flex-start; gap:10px; margin:16px 0; font-size:14px; color:var(--text-secondary);}
+  .checkbox-row input{width:auto; margin:2px 0 0;}
+  .signed-in-as{font-size:13px; color:var(--text-muted); margin-bottom:16px;}
+  .hidden{display:none;}
   .contact-box{
     background:var(--indigo-soft); border:1px solid rgba(44,92,224,.15);
     border-radius:16px; padding:20px 22px; font-size:15px; color:var(--text-primary);
   }
   .contact-box p{margin:4px 0; color:var(--text-primary);}
-  .warn{
-    background:var(--danger-soft); border:1px solid rgba(220,38,38,.2);
-    border-radius:12px; padding:14px 18px; font-size:14px; color:var(--danger);
-    margin-bottom:28px;
-  }
-  .btn{
-    display:inline-block; background:var(--indigo); color:#fff; text-decoration:none;
-    font-weight:600; font-size:15px; padding:10px 20px; border-radius:10px;
-  }
   footer{margin-top:48px; padding-top:20px; border-top:1px solid var(--border); font-size:13px; color:var(--text-muted);}
 </style>
 </head>
@@ -63,34 +78,49 @@
   </a>
 
   <h1>Delete Your Account</h1>
-  <p class="intro">You can permanently delete your Spencheck account and all associated data at any time, either from the app or from here — you don't need the app installed to request it.</p>
+  <p class="intro">Sign in below to permanently delete your Spencheck account and all associated cloud data — no app install needed.</p>
 
-  <div class="warn">This action is permanent and cannot be undone. It removes your Firestore backup data, your Firebase Authentication account, and (if the app is installed on the device you're using) every local table on that device.</div>
+  <div class="warn">This is permanent and cannot be undone. It removes your Firestore backup data, your Firebase Authentication account, and any shared-wallet entries you own.</div>
 
-  <div class="card">
-    <h2 style="margin-top:0; border-bottom:none; padding-bottom:0;">Option 1 — In the app (fastest)</h2>
-    <ol>
-      <li>Open the Spencheck app and sign in.</li>
-      <li>Go to the Account tab (bottom navigation).</li>
-      <li>Scroll down and tap "Delete account".</li>
-      <li>Confirm the deletion when prompted.</li>
-    </ol>
-    <p style="margin-bottom:0;">Your account and all cloud data are deleted immediately.</p>
+  <!-- Step 1: sign in -->
+  <div class="card" id="signin-card">
+    <h2>Step 1 — Sign in</h2>
+    <form id="email-form">
+      <label for="email">Email</label>
+      <input type="email" id="email" autocomplete="username" required />
+      <label for="password">Password</label>
+      <input type="password" id="password" autocomplete="current-password" required />
+      <button type="submit" class="btn-primary" id="email-signin-btn">Sign in with email</button>
+    </form>
+    <div class="divider">or</div>
+    <button type="button" class="btn-outline" id="google-signin-btn">Sign in with Google</button>
+    <div class="status" id="signin-status"></div>
   </div>
 
-  <div class="card">
-    <h2 style="margin-top:0; border-bottom:none; padding-bottom:0;">Option 2 — By email (no app needed)</h2>
-    <p>Email us from your <strong>registered account email address</strong> with the subject "Account Deletion Request." We'll verify the request and delete your account and data within 30 days.</p>
-    <a class="btn" href="mailto:mgokulnarayana@gmail.com?subject=Account%20Deletion%20Request">Email mgokulnarayana@gmail.com</a>
+  <!-- Step 2: confirm + delete -->
+  <div class="card hidden" id="delete-card">
+    <h2>Step 2 — Confirm deletion</h2>
+    <p class="signed-in-as" id="signed-in-as"></p>
+    <div class="checkbox-row">
+      <input type="checkbox" id="confirm-check" />
+      <label for="confirm-check" style="font-weight:400; margin:0;">I understand this permanently deletes my account and all my data, and cannot be undone.</label>
+    </div>
+    <label for="confirm-text">Type DELETE to confirm</label>
+    <input type="text" id="confirm-text" autocomplete="off" />
+    <button type="button" class="btn-danger" id="delete-btn" disabled>Permanently delete my account</button>
+    <button type="button" class="btn-outline row-gap" id="cancel-btn">Cancel, sign out instead</button>
+    <div class="status" id="delete-status"></div>
   </div>
 
-  <h2>What gets deleted</h2>
-  <p>Your Firestore backup (categories, expenses, lending records, budgets, credit cards, wallets, savings goals, subscriptions, loans, investments, income, recurring expenses, tags, chat history, and auto-categorisation keywords), your Firebase Authentication account (email, sign-in credentials), and any shared-wallet entries you own.</p>
+  <!-- Step 3: done -->
+  <div class="card hidden" id="done-card">
+    <h2>Account deleted</h2>
+    <p>Your Spencheck account and all associated cloud data have been permanently deleted.</p>
+  </div>
 
-  <h2>What isn't affected</h2>
-  <p>Local data on a device where you haven't also tapped "Delete account" in the app stays until you uninstall the app or delete it yourself — email-based deletion only reaches what's stored in the cloud (Firebase), since there's no way to reach a device remotely.</p>
+  <p style="font-size:14px;">Trouble signing in, or prefer not to use this page? Email <a href="mailto:mgokulnarayana@gmail.com?subject=Account%20Deletion%20Request">mgokulnarayana@gmail.com</a> with the subject "Account Deletion Request" and we'll process it manually within 30 days.</p>
 
-  <h2>Questions</h2>
+  <h2 style="margin-top:32px;">Questions</h2>
   <div class="contact-box">
     <p><strong>Developer:</strong> Gokul Narayana Maddala</p>
     <p><strong>Email:</strong> <a href="mailto:mgokulnarayana@gmail.com">mgokulnarayana@gmail.com</a></p>
@@ -99,5 +129,156 @@
 
   <footer>&copy; 2026 Spencheck. Your data stays on your device.</footer>
 </div>
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script>
+  // Config for the spencheck-598db project — the one the Android app
+  // actually uses. Firebase web config values are not secrets (access is
+  // gated by Firestore Security Rules, not by keeping this hidden); see
+  // https://firebase.google.com/docs/projects/api-keys
+  const firebaseConfig = {
+    apiKey: "AIzaSyDS1vnd-Wi9sryUMFWOrut7oGBccqJ9zeg",
+    authDomain: "spencheck-598db.firebaseapp.com",
+    projectId: "spencheck-598db",
+    storageBucket: "spencheck-598db.firebasestorage.app",
+    messagingSenderId: "258066583601",
+    appId: "1:258066583601:web:0ed9f71b2e8c6243eb8510",
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
+  // Mirrors SyncService._tables in lib/data/firebase/sync_service.dart —
+  // keep this list in sync if that one changes.
+  const TABLES = [
+    'categories', 'expenses', 'people', 'ledger_entries', 'budgets',
+    'credit_cards', 'card_payments', 'wallets', 'wallet_transfers',
+    'savings_goals', 'subscriptions', 'loans', 'investments', 'incomes',
+    'recurring_expenses', 'tags', 'expense_tags', 'chat_sessions',
+    'chat_messages', 'custom_keywords',
+  ];
+
+  const signinCard = document.getElementById('signin-card');
+  const deleteCard = document.getElementById('delete-card');
+  const doneCard = document.getElementById('done-card');
+  const signinStatus = document.getElementById('signin-status');
+  const deleteStatus = document.getElementById('delete-status');
+  const signedInAs = document.getElementById('signed-in-as');
+  const confirmCheck = document.getElementById('confirm-check');
+  const confirmText = document.getElementById('confirm-text');
+  const deleteBtn = document.getElementById('delete-btn');
+
+  function showStatus(el, message, kind) {
+    el.textContent = message;
+    el.className = 'status ' + kind;
+  }
+
+  function updateDeleteButtonState() {
+    deleteBtn.disabled = !(confirmCheck.checked && confirmText.value.trim() === 'DELETE');
+  }
+  confirmCheck.addEventListener('change', updateDeleteButtonState);
+  confirmText.addEventListener('input', updateDeleteButtonState);
+
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      signinCard.classList.add('hidden');
+      deleteCard.classList.remove('hidden');
+      signedInAs.textContent = 'Signed in as ' + (user.email || user.uid);
+    } else {
+      signinCard.classList.remove('hidden');
+      deleteCard.classList.add('hidden');
+    }
+  });
+
+  document.getElementById('email-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    showStatus(signinStatus, 'Signing in…', 'info');
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      signinStatus.className = 'status';
+    } catch (err) {
+      showStatus(signinStatus, 'Sign-in failed: ' + (err.message || err.code), 'error');
+    }
+  });
+
+  document.getElementById('google-signin-btn').addEventListener('click', async () => {
+    showStatus(signinStatus, 'Opening Google sign-in…', 'info');
+    try {
+      await auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+      signinStatus.className = 'status';
+    } catch (err) {
+      showStatus(signinStatus, 'Sign-in failed: ' + (err.message || err.code), 'error');
+    }
+  });
+
+  document.getElementById('cancel-btn').addEventListener('click', async () => {
+    await auth.signOut();
+  });
+
+  // Deletes every doc in users/{uid}/{table} in batches of <=450, mirroring
+  // SyncService.deleteAllCloudData's own batch cap (Firestore's real limit
+  // is 500 writes/batch).
+  async function deleteSubcollection(uid, table) {
+    const colRef = db.collection('users').doc(uid).collection(table);
+    // Loop in pages since a single get() could exceed batch limits for a
+    // very large table.
+    while (true) {
+      const snapshot = await colRef.limit(450).get();
+      if (snapshot.empty) return;
+      const batch = db.batch();
+      snapshot.docs.forEach((doc) => batch.delete(doc.ref));
+      await batch.commit();
+    }
+  }
+
+  async function deleteSharedWalletsOwnedBy(uid) {
+    const snapshot = await db.collection('shared_wallets').where('ownerUid', '==', uid).get();
+    if (snapshot.empty) return;
+    const batch = db.batch();
+    snapshot.docs.forEach((doc) => batch.delete(doc.ref));
+    await batch.commit();
+  }
+
+  deleteBtn.addEventListener('click', async () => {
+    const user = auth.currentUser;
+    if (!user) return;
+    deleteBtn.disabled = true;
+    try {
+      showStatus(deleteStatus, 'Deleting your data…', 'info');
+      for (const table of TABLES) {
+        await deleteSubcollection(user.uid, table);
+      }
+      showStatus(deleteStatus, 'Deleting shared wallets…', 'info');
+      await deleteSharedWalletsOwnedBy(user.uid);
+
+      showStatus(deleteStatus, 'Removing account record…', 'info');
+      await db.collection('users').doc(user.uid).delete();
+
+      showStatus(deleteStatus, 'Deleting your sign-in account…', 'info');
+      await user.delete();
+
+      deleteCard.classList.add('hidden');
+      doneCard.classList.remove('hidden');
+    } catch (err) {
+      if (err.code === 'auth/requires-recent-login') {
+        showStatus(
+          deleteStatus,
+          'For security, please sign out and sign in again right before deleting — your ' +
+          'session is too old to authorize this.',
+          'error',
+        );
+        deleteBtn.disabled = false;
+      } else {
+        showStatus(deleteStatus, 'Something went wrong: ' + (err.message || err.code) +
+          '. Your data may be partially deleted — email us to confirm/finish this.', 'error');
+        deleteBtn.disabled = false;
+      }
+    }
+  });
+</script>
 </body>
 </html>
