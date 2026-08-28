@@ -57,6 +57,8 @@
   <p>Android only: by default, the app blocks screenshots, screen recording, and hides its content from the recent-apps preview, since your balances and card details are sensitive. You can turn this off from Account &gt; Security &amp; backup if you want to take a screenshot or record your screen yourself.</p>
   <p>SMS auto-detection (Android only): the app reads bank/UPI debit-alert messages on-device to suggest expenses. The message text itself is never stored or uploaded — only the amount, merchant name, and date the app extracts from it, and only after you accept or the app auto-logs a repeat merchant. You can grant or revoke SMS permission at any time from your phone's system settings.</p>
   <p>Receipt scanning uses Google ML Kit's on-device text recognition — a photo you take is processed on your phone and never uploaded anywhere.</p>
+  <p>Importing a bank statement (CSV or PDF, Account &gt; Import bank statement) is parsed entirely on your phone — the file itself is never uploaded anywhere, only the transactions you choose to import from it get saved to your expense history.</p>
+  <p>Android only: to show which UPI apps you have installed for the "Pay via UPI" picker, the app checks your device's installed apps for known UPI-capable ones. This check never leaves your phone.</p>
   <p>The chat assistant answers common commands (adding an expense, checking your budget, lending status, and more) instantly on-device — nothing is sent anywhere for these. If you optionally add your own Gemini or ChatGPT API key in Account &gt; Cloud AI provider, open-ended questions you type are sent to that provider's servers to generate a reply, under their own privacy policy, not ours. With no key set, chat never sends anything off your phone.</p>
   <p>If you pick a contact to log who you lent money to, the app reads only that one contact's name via your phone's native contact picker — it never requests broad access to your contacts and never scans or lists your full contact book. You can type a phone number in yourself if you want to save one. This data is used strictly on-device and is never uploaded, shared, or stored on our servers.</p>
   <p>A PIN or biometric app-lock, and any saved sign-in credentials for fingerprint unlock, are stored securely in your device's hardware keystore.</p>
@@ -87,12 +89,14 @@
   <h2 id="delete-account">Data retention and deletion</h2>
   <p>Local data (everything described above) stays on your device for as long as the app is installed. You can delete individual entries at any time from within the app, and uninstalling the app permanently deletes all locally stored data.</p>
   <p>If you signed in and used Cloud backup, that copy is retained in Firestore until you delete it yourself. Turning Cloud backup off (without deleting your account) stops future syncs but does not retroactively delete the existing Firestore copy — use Delete account, below, for that.</p>
-  <p><strong>To request deletion of your Spencheck account and all associated data:</strong></p>
-  <p>1. Open the Spencheck app and sign in.<br>
+  <p><strong>To request deletion of your Spencheck account and all associated data, either:</strong></p>
+  <p><strong>In the app</strong> (fastest — deletes immediately):<br>
+  1. Open the Spencheck app and sign in.<br>
   2. Go to the Account tab (bottom navigation).<br>
   3. Scroll down and tap "Delete account".<br>
   4. Confirm the deletion when prompted.</p>
-  <p>This permanently removes, in order: your Firestore backup data, your Firebase Authentication account, and every local table on the device. This cannot be undone and cannot be requested any other way (there is no separate web form) — you must have the app installed and be signed in to complete it, since deletion requires an authenticated request.</p>
+  <p><strong>From the web, without the app installed</strong> — email <a href="mailto:mgokulnarayana@gmail.com?subject=Account%20Deletion%20Request">mgokulnarayana@gmail.com</a> from your registered email address with the subject "Account Deletion Request." We'll verify the request and delete your account within 30 days.</p>
+  <p>Either method permanently removes, in order: your Firestore backup data, your Firebase Authentication account, and every local table on the device you had the app installed on. This cannot be undone. See the dedicated <a href="delete-account.html">Delete Your Account</a> page for the same steps.</p>
   <h2>Changes to this policy</h2>
   <p>We may update this Privacy Policy from time to time. Changes will be posted on this page and reflected in the "Effective date" above.</p>
 
