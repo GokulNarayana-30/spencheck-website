@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Delete Your Account — Spencheck</title>
+<meta name="description" content="How to permanently delete your Spencheck account and all associated data, from the app or by email." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --indigo:#2C5CE0; --indigo-soft:#EEF2FF;
+    --base:#F7F8FC; --surface:#FFFFFF;
+    --text-primary:#0F172A; --text-secondary:#475569; --text-muted:#94A3B8;
+    --border:#E2E8F0; --danger:#DC2626; --danger-soft:#FEF2F2;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--base); color:var(--text-primary);
+    font-family:'Inter',system-ui,sans-serif; line-height:1.65;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:56px 20px 96px;}
+  a{color:var(--indigo);}
+  .brand{display:flex; align-items:center; gap:10px; margin-bottom:32px; text-decoration:none;}
+  .brand img{width:28px; height:28px;}
+  .brand span{font-family:'Sora',sans-serif; font-weight:800; font-size:18px; color:var(--text-primary);}
+  h1{font-family:'Sora',sans-serif; font-weight:800; font-size:32px; margin:0 0 8px;}
+  .intro{font-size:16px; color:var(--text-secondary); margin:0 0 36px;}
+  h2{
+    font-family:'Sora',sans-serif; font-weight:700; font-size:19px;
+    margin:36px 0 14px; padding-bottom:10px; border-bottom:1px solid var(--border);
+  }
+  p{font-size:15px; color:var(--text-secondary); margin:0 0 14px;}
+  ol{margin:0 0 14px; padding-left:22px; color:var(--text-secondary); font-size:15px;}
+  ol li{margin-bottom:6px;}
+  .card{
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:16px; padding:22px 24px; margin-bottom:20px;
+  }
+  .contact-box{
+    background:var(--indigo-soft); border:1px solid rgba(44,92,224,.15);
+    border-radius:16px; padding:20px 22px; font-size:15px; color:var(--text-primary);
+  }
+  .contact-box p{margin:4px 0; color:var(--text-primary);}
+  .warn{
+    background:var(--danger-soft); border:1px solid rgba(220,38,38,.2);
+    border-radius:12px; padding:14px 18px; font-size:14px; color:var(--danger);
+    margin-bottom:28px;
+  }
+  .btn{
+    display:inline-block; background:var(--indigo); color:#fff; text-decoration:none;
+    font-weight:600; font-size:15px; padding:10px 20px; border-radius:10px;
+  }
+  footer{margin-top:48px; padding-top:20px; border-top:1px solid var(--border); font-size:13px; color:var(--text-muted);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="brand" href="index.html">
+    <img src="spenchecklogo.svg" alt="" />
+    <span>Spencheck</span>
+  </a>
+
+  <h1>Delete Your Account</h1>
+  <p class="intro">You can permanently delete your Spencheck account and all associated data at any time, either from the app or from here — you don't need the app installed to request it.</p>
+
+  <div class="warn">This action is permanent and cannot be undone. It removes your Firestore backup data, your Firebase Authentication account, and (if the app is installed on the device you're using) every local table on that device.</div>
+
+  <div class="card">
+    <h2 style="margin-top:0; border-bottom:none; padding-bottom:0;">Option 1 — In the app (fastest)</h2>
+    <ol>
+      <li>Open the Spencheck app and sign in.</li>
+      <li>Go to the Account tab (bottom navigation).</li>
+      <li>Scroll down and tap "Delete account".</li>
+      <li>Confirm the deletion when prompted.</li>
+    </ol>
+    <p style="margin-bottom:0;">Your account and all cloud data are deleted immediately.</p>
+  </div>
+
+  <div class="card">
+    <h2 style="margin-top:0; border-bottom:none; padding-bottom:0;">Option 2 — By email (no app needed)</h2>
+    <p>Email us from your <strong>registered account email address</strong> with the subject "Account Deletion Request." We'll verify the request and delete your account and data within 30 days.</p>
+    <a class="btn" href="mailto:mgokulnarayana@gmail.com?subject=Account%20Deletion%20Request">Email mgokulnarayana@gmail.com</a>
+  </div>
+
+  <h2>What gets deleted</h2>
+  <p>Your Firestore backup (categories, expenses, lending records, budgets, credit cards, wallets, savings goals, subscriptions, loans, investments, income, recurring expenses, tags, chat history, and auto-categorisation keywords), your Firebase Authentication account (email, sign-in credentials), and any shared-wallet entries you own.</p>
+
+  <h2>What isn't affected</h2>
+  <p>Local data on a device where you haven't also tapped "Delete account" in the app stays until you uninstall the app or delete it yourself — email-based deletion only reaches what's stored in the cloud (Firebase), since there's no way to reach a device remotely.</p>
+
+  <h2>Questions</h2>
+  <div class="contact-box">
+    <p><strong>Developer:</strong> Gokul Narayana Maddala</p>
+    <p><strong>Email:</strong> <a href="mailto:mgokulnarayana@gmail.com">mgokulnarayana@gmail.com</a></p>
+    <p>See the full <a href="privacy-policy.html">Privacy Policy</a> for how your data is handled before deletion.</p>
+  </div>
+
+  <footer>&copy; 2026 Spencheck. Your data stays on your device.</footer>
+</div>
+</body>
+</html>
