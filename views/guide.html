@@ -1,0 +1,165 @@
+<!-- =====================================================
+     APP GUIDE PAGE VIEW — guide.html
+     ===================================================== -->
+
+<!-- Hero -->
+<section class="features-hero">
+  <div class="container">
+    <div class="section-label">App guide</div>
+    <h1 class="section-title">See every screen, before you download</h1>
+    <p class="section-subtitle" style="margin:16px auto 0; max-width:560px; color:var(--text-secondary);">
+      A visual walkthrough of Spencheck — every major screen, exactly as it looks on your phone.
+    </p>
+
+    <!-- Category tabs -->
+    <div class="features-nav-tabs">
+      <button class="tab-pill" ng-repeat="t in guideTabs"
+              ng-class="{'active': activeGuideTab === t.id}"
+              ng-click="activeGuideTab = t.id">
+        {{t.label}}
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     GUIDE GRID SECTIONS
+     ===================================================== -->
+
+<!-- TRACKING -->
+<section class="guide-section" ng-show="activeGuideTab === 'all' || activeGuideTab === 'tracking'">
+  <div class="container">
+    <div class="guide-section-header">
+      <div class="section-label">Expense Tracking</div>
+      <h2 class="section-title">The core: logging money out</h2>
+    </div>
+    <div class="guide-grid">
+      <div class="guide-card" ng-repeat="s in guideScreens.tracking">
+        <div class="guide-phone-wrap">
+          <div class="guide-phone-glow"></div>
+          <div class="guide-phone-frame">
+            <div class="guide-phone-notch"></div>
+            <div class="guide-phone-screen">
+              <img ng-src="assets/screenshots/{{s.img}}" alt="{{s.label}}" />
+            </div>
+          </div>
+        </div>
+        <div class="guide-card-label">{{s.label}}</div>
+        <div class="guide-card-desc">{{s.desc}}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUDGETS & GOALS -->
+<section class="guide-section" style="background:var(--base);" ng-show="activeGuideTab === 'all' || activeGuideTab === 'budgets'">
+  <div class="container">
+    <div class="guide-section-header">
+      <div class="section-label">Budgets &amp; Goals</div>
+      <h2 class="section-title">Spend limits that actually stick</h2>
+    </div>
+    <div class="guide-grid">
+      <div class="guide-card" ng-repeat="s in guideScreens.budgets">
+        <div class="guide-phone-wrap">
+          <div class="guide-phone-glow" style="background:radial-gradient(circle,rgba(247,144,9,.25) 0%,transparent 70%);"></div>
+          <div class="guide-phone-frame">
+            <div class="guide-phone-notch"></div>
+            <div class="guide-phone-screen">
+              <img ng-src="assets/screenshots/{{s.img}}" alt="{{s.label}}" />
+            </div>
+          </div>
+        </div>
+        <div class="guide-card-label">{{s.label}}</div>
+        <div class="guide-card-desc">{{s.desc}}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REPORTS & INSIGHTS -->
+<section class="guide-section" ng-show="activeGuideTab === 'all' || activeGuideTab === 'reports'">
+  <div class="container">
+    <div class="guide-section-header">
+      <div class="section-label">Reports &amp; Insights</div>
+      <h2 class="section-title">Understand your money</h2>
+    </div>
+    <div class="guide-grid">
+      <div class="guide-card" ng-repeat="s in guideScreens.reports">
+        <div class="guide-phone-wrap">
+          <div class="guide-phone-glow" style="background:radial-gradient(circle,rgba(18,183,106,.25) 0%,transparent 70%);"></div>
+          <div class="guide-phone-frame">
+            <div class="guide-phone-notch"></div>
+            <div class="guide-phone-screen">
+              <img ng-src="assets/screenshots/{{s.img}}" alt="{{s.label}}" />
+            </div>
+          </div>
+        </div>
+        <div class="guide-card-label">{{s.label}}</div>
+        <div class="guide-card-desc">{{s.desc}}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MONEY MANAGEMENT -->
+<section class="guide-section" style="background:var(--base);" ng-show="activeGuideTab === 'all' || activeGuideTab === 'money'">
+  <div class="container">
+    <div class="guide-section-header">
+      <div class="section-label">Money Management</div>
+      <h2 class="section-title">Cards, lending &amp; investments</h2>
+    </div>
+    <div class="guide-grid">
+      <div class="guide-card" ng-repeat="s in guideScreens.money">
+        <div class="guide-phone-wrap">
+          <div class="guide-phone-glow" style="background:radial-gradient(circle,rgba(240,68,56,.2) 0%,transparent 70%);"></div>
+          <div class="guide-phone-frame">
+            <div class="guide-phone-notch"></div>
+            <div class="guide-phone-screen">
+              <img ng-src="assets/screenshots/{{s.img}}" alt="{{s.label}}" />
+            </div>
+          </div>
+        </div>
+        <div class="guide-card-label">{{s.label}}</div>
+        <div class="guide-card-desc">{{s.desc}}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI & MORE -->
+<section class="guide-section" ng-show="activeGuideTab === 'all' || activeGuideTab === 'more'">
+  <div class="container">
+    <div class="guide-section-header">
+      <div class="section-label">AI &amp; More</div>
+      <h2 class="section-title">The extras that make it complete</h2>
+    </div>
+    <div class="guide-grid">
+      <div class="guide-card" ng-repeat="s in guideScreens.more">
+        <div class="guide-phone-wrap">
+          <div class="guide-phone-glow" style="background:radial-gradient(circle,rgba(158,119,237,.25) 0%,transparent 70%);"></div>
+          <div class="guide-phone-frame">
+            <div class="guide-phone-notch"></div>
+            <div class="guide-phone-screen">
+              <img ng-src="assets/screenshots/{{s.img}}" alt="{{s.label}}" />
+            </div>
+          </div>
+        </div>
+        <div class="guide-card-label">{{s.label}}</div>
+        <div class="guide-card-desc">{{s.desc}}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <div class="container">
+    <div class="section-label" style="color:rgba(255,255,255,0.85); background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); margin-bottom:16px;">Free forever</div>
+    <h2 class="section-title" style="color:white;">Like what you see? Download free.</h2>
+    <p class="section-subtitle" style="color:rgba(255,255,255,0.72);">Everything you just saw — completely free, no subscription, no ads.</p>
+    <div class="cta-banner-actions">
+      <a href="#!/download" class="btn btn-ghost btn-lg">⬇ Download Free</a>
+      <a href="#!/features" class="btn btn-ghost btn-lg">See All Features →</a>
+    </div>
+  </div>
+</section>
