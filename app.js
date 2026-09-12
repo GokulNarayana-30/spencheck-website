@@ -467,6 +467,10 @@ angular.module('spencheckApp', ['ngRoute'])
 .controller('GuideController', ['$scope', function($scope) {
   $scope.activeGuideTab = 'all';
 
+  $scope.setGuideTab = function(id) {
+    $scope.activeGuideTab = id;
+  };
+
   $scope.guideTabs = [
     { id: 'all',      label: 'All screens' },
     { id: 'tracking', label: '💸 Tracking' },
