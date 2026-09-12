@@ -1,7 +1,7 @@
 // =========================================================
 // SPENCHECK MARKETING SITE — AngularJS App
 // Module: spencheckApp
-// Routing: ngRoute with 5 pages
+// Routing: ngRoute with 6 pages (home, features, guide, pricing, faq, download)
 // =========================================================
 
 angular.module('spencheckApp', ['ngRoute'])
@@ -33,6 +33,11 @@ angular.module('spencheckApp', ['ngRoute'])
       templateUrl: 'views/download.html',
       controller: 'DownloadController',
       title: 'Download — Spencheck'
+    })
+    .when('/guide', {
+      templateUrl: 'views/guide.html',
+      controller: 'GuideController',
+      title: 'App Guide — Spencheck'
     })
     .otherwise({ redirectTo: '/' });
 }])
@@ -111,7 +116,7 @@ angular.module('spencheckApp', ['ngRoute'])
   ];
 
   $scope.steps = [
-    { num: '1', title: 'Download the app', desc: 'Install Spencheck free on Android or iOS.' },
+    { num: '1', title: 'Download the app', desc: 'Install Spencheck free on Android — no account needed.' },
     { num: '2', title: 'Add your expenses', desc: 'Log manually or let SMS auto-detection do it for you.' },
     { num: '3', title: 'Set your budget', desc: 'Define monthly limits and savings goals.' },
     { num: '4', title: 'Watch your money grow', desc: 'Check insights, cut waste, hit your goals.' }
@@ -238,7 +243,7 @@ angular.module('spencheckApp', ['ngRoute'])
       items: [
         {
           q: 'What is Spencheck?',
-          a: 'Spencheck is a personal finance app for Android and iOS that helps you track every rupee you spend, set budgets, manage credit cards, track who owes you money, monitor your investments, and understand your financial habits — all in one place, and all stored privately on your phone.',
+          a: 'Spencheck is a personal finance app for Android that helps you track every rupee you spend, set budgets, manage credit cards, track who owes you money, monitor your investments, and understand your financial habits — all in one place, and all stored privately on your phone.',
           open: false
         },
         {
@@ -256,11 +261,7 @@ angular.module('spencheckApp', ['ngRoute'])
           a: 'Yes, on Android. You can configure up to 3 quick-add buttons on the Spencheck home screen widget. Tapping a button instantly logs a preset expense (e.g. ₹50 coffee → Food) in the background — no need to open the app.',
           open: false
         },
-        {
-          q: 'Is Spencheck available on iOS?',
-          a: 'Yes. Spencheck is available on both Android and iOS. Note that some features are Android-only: SMS expense auto-detection, the home screen widget, and the real-time UPI app list (iOS uses a fixed common list instead).',
-          open: false
-        }
+
       ]
     },
     {
@@ -349,7 +350,7 @@ angular.module('spencheckApp', ['ngRoute'])
       items: [
         {
           q: 'What is SMS expense detection?',
-          a: 'On Android, Spencheck can read your bank and UPI debit SMS alerts and automatically suggest them as expenses. It uses a combination of regex patterns and an on-device ML model ("Needle 2") to extract the amount, merchant, and UPI app. Nothing leaves your device — all parsing happens locally.',
+          a: 'On Android, Spencheck reads your bank and UPI debit SMS alerts and automatically suggests them as expenses. A battle-tested regex engine tuned across 35+ Indian banks extracts the amount, merchant, and UPI app — all parsing happens on-device with nothing leaving your phone.',
           open: false
         },
         {
@@ -362,11 +363,7 @@ angular.module('spencheckApp', ['ngRoute'])
           a: 'Yes. If the SMS contains the last 4 digits of an account (e.g. "A/c XX1234"), Spencheck matches it to the card or bank wallet you\'ve set up with those digits. When you accept the transaction, the card or wallet is pre-filled automatically.',
           open: false
         },
-        {
-          q: 'Is SMS detection available on iOS?',
-          a: 'No. iOS does not allow apps to read SMS messages. SMS detection is Android-only.',
-          open: false
-        }
+
       ]
     },
     {
@@ -456,28 +453,139 @@ angular.module('spencheckApp', ['ngRoute'])
 // ── PricingController ────────────────────────────────────
 .controller('DownloadController', ['$scope', function($scope) {
   $scope.platforms = [
-    {
-      icon: '🤖',
-      name: 'Android',
-      desc: 'Full feature set including SMS auto-detection, home screen widget, and real-time UPI app list.',
-      badge: 'Available Now',
-      badgeClass: '',
-      btn: 'Download APK'
-    },
-    {
-      icon: '🍎',
-      name: 'iOS',
-      desc: 'Complete expense tracking, budgets, reports, AI chat, and more — optimised for iPhone.',
-      badge: 'Coming Soon',
-      badgeClass: 'coming-soon',
-      btn: 'Notify Me'
-    }
+    { icon: '🤖', name: 'Android', desc: 'Full feature set including SMS auto-detection, home screen widget, and real-time UPI app list.', badge: 'Available Now', badgeClass: '', btn: 'Download APK' }
   ];
 
   $scope.requirements = [
-    { icon: '📱', label: 'Android 7.0+', sub: 'for Android build' },
-    { icon: '🍎', label: 'iOS 14+', sub: 'for iOS build' },
+    { icon: '📱', label: 'Android 7.0+', sub: 'required' },
     { icon: '💾', label: '~80 MB', sub: 'storage required' },
     { icon: '🌐', label: 'Offline-first', sub: 'no internet needed' }
   ];
+}])
+
+// ── GuideController ──────────────────────────────────────
+.controller('GuideController', ['$scope', function($scope) {
+  $scope.activeGuideTab = 'all';
+
+  $scope.guideTabs = [
+    { id: 'all',      label: 'All screens' },
+    { id: 'tracking', label: '💸 Tracking' },
+    { id: 'budgets',  label: '🎯 Budgets' },
+    { id: 'reports',  label: '📊 Reports' },
+    { id: 'money',    label: '💳 Money' },
+    { id: 'more',     label: '✨ More' },
+  ];
+
+  $scope.guideScreens = {
+    tracking: [
+      {
+        img: 'dashboard.png',
+        label: 'Dashboard',
+        desc: 'Your financial snapshot at a glance — budget ring, recent expenses, and quick actions.'
+      },
+      {
+        img: 'expenses.png',
+        label: 'Expenses',
+        desc: 'Full transaction list with search, filter by category or date, and swipe to edit.'
+      },
+      {
+        img: 'add_expense.png',
+        label: 'Add Expense',
+        desc: 'Log a spend in under 5 seconds — amount, category, payment method, and optional note.'
+      },
+      {
+        img: 'sms_detect.png',
+        label: 'SMS Detection',
+        desc: 'Android auto-reads your bank SMS alerts and queues detected transactions for one-tap confirmation.'
+      },
+      {
+        img: 'subscriptions.png',
+        label: 'Subscriptions',
+        desc: 'Track recurring subscriptions like Netflix, Spotify, and Zomato Gold with upcoming renewal alerts.'
+      },
+    ],
+    budgets: [
+      {
+        img: 'budgets.png',
+        label: 'Budgets',
+        desc: 'Monthly and per-category limits shown as a progress ring that turns amber then red as you approach your limit.'
+      },
+      {
+        img: 'goals.png',
+        label: 'Savings Goals',
+        desc: 'Named goals like "Vacation Fund" with a progress ring and manual save entries.'
+      },
+      {
+        img: 'challenges.png',
+        label: 'Challenges',
+        desc: 'Self-imposed spending challenges — try a no-eating-out week or hit a savings milestone.'
+      },
+      {
+        img: 'gamification.png',
+        label: 'Gamification',
+        desc: 'Streaks, milestones, and achievements that reward consistent tracking habits.'
+      },
+    ],
+    reports: [
+      {
+        img: 'reports.png',
+        label: 'Reports',
+        desc: 'Weekly, monthly, and yearly spend with a 6-period bar chart and one-tap drill-down into any period.'
+      },
+      {
+        img: 'insights.png',
+        label: 'Insights',
+        desc: 'Auto-generated insights: biggest category change, busiest day, under-budget streak, and more.'
+      },
+      {
+        img: 'wrap.png',
+        label: 'Year in Review',
+        desc: 'An animated annual wrap-up showing your top categories, biggest splurge, and savings highlights.'
+      },
+    ],
+    money: [
+      {
+        img: 'cards.png',
+        label: 'Credit Cards',
+        desc: 'Realistic card visuals with outstanding balance, utilisation bar, credit limit, and due date.'
+      },
+      {
+        img: 'lendings.png',
+        label: 'Lending',
+        desc: 'People ledger showing who owes you and who you owe, with WhatsApp reminder one-tap send.'
+      },
+      {
+        img: 'split_bill.png',
+        label: 'Split Bill',
+        desc: 'Divide any bill equally or by custom amounts and auto-add each share to the lending ledger.'
+      },
+      {
+        img: 'investments.png',
+        label: 'Investments',
+        desc: 'Track Gold, FD, RD, PPF, Stocks, and Mutual Funds with invested vs current value and overall gain.'
+      },
+      {
+        img: 'wallets.png',
+        label: 'Wallets',
+        desc: 'Cash, bank, UPI, and investment wallets with auto-computed balances that update as you log expenses.'
+      },
+      {
+        img: 'emi.png',
+        label: 'Loan EMI Tracker',
+        desc: 'Add home or personal loans. Spencheck computes EMI and shows a full amortisation schedule.'
+      },
+      {
+        img: 'networth.png',
+        label: 'Net Worth',
+        desc: 'Your assets minus liabilities in one number — updated live as you add investments and loans.'
+      },
+    ],
+    more: [
+      {
+        img: 'chat.png',
+        label: 'AI Chat',
+        desc: '"Add ₹450 food" — the assistant logs it instantly. Upgrade with your own Gemini or ChatGPT key.'
+      },
+    ],
+  };
 }]);
