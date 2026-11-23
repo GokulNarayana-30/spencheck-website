@@ -747,6 +747,68 @@
   </section>
 </div>
 
+<div ng-show="activeTab === 'all' || activeTab === 'social'">
+  <section class="feature-block" id="friends-chat">
+    <div class="container">
+      <div class="feature-block-inner">
+
+        <div class="feature-block-content">
+          <div class="section-label">Friends &amp; Chat</div>
+          <h2 class="section-title">Split bills with friends, right in the chat</h2>
+          <p class="section-subtitle">
+            Optional and free. Add the people you share money with, chat one-to-one or in groups, and settle up
+            without spreadsheets or reminders that feel awkward.
+          </p>
+
+          <div class="feature-detail-list">
+            <div class="fdl-item">
+              <div class="fdl-icon">✓</div>
+              <span><strong>Find friends by @username or QR code</strong> — Pick a username, search for friends, or
+                scan the QR code on their profile.</span>
+            </div>
+            <div class="fdl-item">
+              <div class="fdl-icon">✓</div>
+              <span><strong>Chats and groups</strong> — Message one person or a whole group, and send photos.
+                Photos are deleted from our servers after 7 days.</span>
+            </div>
+            <div class="fdl-item">
+              <div class="fdl-icon indigo">✓</div>
+              <span><strong>Split a bill in the chat</strong> — Everyone sees their share and taps "Mark paid" when
+                they've paid you back. Record it in Lending with one tap.</span>
+            </div>
+            <div class="fdl-item">
+              <div class="fdl-icon">✓</div>
+              <span><strong>Your money stays private</strong> — Friends see your name and @username, never your
+                expenses, budgets or balances. Block or report anyone.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="feature-visual-card">
+            <div class="fvc-inner">
+              <div class="fvc-header">Goa trip 🏖️</div>
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <div style="align-self:flex-start; max-width:80%; background:#1E293B; border-radius:14px; padding:10px 14px; font-family:'Inter',sans-serif; font-size:13px; color:rgba(255,255,255,0.85);">
+                  Dinner was great! Who paid?</div>
+                <div style="align-self:flex-end; max-width:80%; background:#4A78FF33; border-radius:14px; padding:10px 14px; font-family:'Inter',sans-serif; font-size:13px; color:white;">
+                  Me — splitting it now 👇</div>
+                <div style="background:#12B76A22; border:1px solid rgba(18,183,106,.35); border-radius:14px; padding:14px;">
+                  <div style="font-size:11px; color:rgba(255,255,255,0.5); font-family:'Inter',sans-serif;">Split · Dinner</div>
+                  <div style="font-family:'Sora',sans-serif; font-size:18px; font-weight:800; color:white; margin:2px 0 8px;">₹2,400</div>
+                  <div style="display:flex; justify-content:space-between; font-family:'Inter',sans-serif; font-size:12px; color:rgba(255,255,255,0.75); padding:4px 0;"><span>Asha · ₹800</span><span style="color:#12B76A;">Paid ✓</span></div>
+                  <div style="display:flex; justify-content:space-between; font-family:'Inter',sans-serif; font-size:12px; color:rgba(255,255,255,0.75); padding:4px 0;"><span>Ravi · ₹800</span><span style="color:#F79009;">Pending</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+
 <!-- ===================================================
      BLOCK 7: SECURITY & PRIVACY
      =================================================== -->
@@ -766,13 +828,13 @@
           <div class="feature-detail-list">
             <div class="fdl-item">
               <div class="fdl-icon">✓</div>
-              <span><strong>Local-first storage</strong> — All data is in a SQLite database on your device. No account
+              <span><strong>Local-first storage</strong> — All data is in an encrypted SQLite database on your device. No account
                 required to use the app.</span>
             </div>
             <div class="fdl-item">
               <div class="fdl-icon">✓</div>
-              <span><strong>PIN lock with biometrics</strong> — Set a 4-digit PIN that locks the app on close or when it
-                goes to the background. Enable fingerprint or Face ID for quick unlocking.</span>
+              <span><strong>PIN lock with biometrics</strong> — Set a PIN (4 digits or more) that locks the app on close or when it
+                goes to the background. Enable fingerprint or face unlock for quick unlocking.</span>
             </div>
             <div class="fdl-item">
               <div class="fdl-icon">✓</div>

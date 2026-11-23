@@ -90,8 +90,8 @@ angular.module('spencheckApp', ['ngRoute'])
     },
     {
       icon: '🤝',
-      title: 'Lending Tracker',
-      desc: 'Track who owes you and what you owe others. Send a WhatsApp reminder with a UPI payment link in one tap. Split bills right from the app.',
+      title: 'Friends, Lending & Splits',
+      desc: 'Track who owes you and what you owe others. Add friends by @username or QR code, chat, and split a bill right in the chat — everyone sees their share and marks it paid.',
       link: '#!/features'
     },
     {
@@ -123,10 +123,10 @@ angular.module('spencheckApp', ['ngRoute'])
   ];
 
   $scope.trustPoints = [
-    { icon: '🔒', label: 'Offline-first', desc: 'No account needed. The app works fully offline — your data never leaves your phone unless you opt into cloud backup.' },
+    { icon: '🔒', label: 'Offline-first', desc: 'No account needed to track your money. Your expenses, budgets and balances never leave your phone unless you turn on cloud backup, share a wallet, or add your own AI key. Friends & chat is optional and needs a sign-in.' },
     { icon: '🚫', label: 'No ads, no tracking', desc: 'Spencheck has no advertising, no user profiling, and no data sold to third parties. Period.' },
-    { icon: '🗑️', label: 'Delete everything', desc: 'One tap deletes your local data, your cloud backup, and your account permanently.' },
-    { icon: '📱', label: 'PIN & biometrics', desc: 'Lock the app with a PIN and unlock instantly with your fingerprint or Face ID.' }
+    { icon: '🗑️', label: 'Delete everything', desc: 'One tap deletes your local data, your cloud backup, your chats and friends, and your account permanently.' },
+    { icon: '📱', label: 'PIN & biometrics', desc: 'Lock the app with a PIN and unlock instantly with your fingerprint or face unlock.' }
   ];
 }])
 
@@ -140,6 +140,7 @@ angular.module('spencheckApp', ['ngRoute'])
     { id: 'budgets', label: 'Budgets & Goals' },
     { id: 'reports', label: 'Reports' },
     { id: 'money', label: 'Cards & Lending' },
+    { id: 'social', label: 'Friends & Chat' },
     { id: 'ai', label: 'AI & Smart' },
     { id: 'security', label: 'Security & Privacy' }
   ];
@@ -158,7 +159,10 @@ angular.module('spencheckApp', ['ngRoute'])
     { icon: '🔎', title: 'Powerful Filters', desc: 'Filter by category, payment method, tags, date range, or amount — or search by note or merchant name.' },
     { icon: '💡', title: 'Spend Projection', desc: 'Spencheck estimates your end-of-month total based on your daily average so far.' },
     { icon: '📲', title: 'Home Screen Widget', desc: 'Log common expenses instantly from your Android home screen without opening the app.' },
-    { icon: '🔁', title: 'Split Bills', desc: 'Divide any bill equally or by custom amounts and log shares directly to your lending ledger.' },
+    { icon: '🔁', title: 'Split Bills', desc: 'Divide any bill equally or by custom amounts — in the app or right inside a friend or group chat — and log shares to your lending ledger.' },
+    { icon: '⏰', title: 'Reminders', desc: 'Set one-off or repeating reminders — pay rent, collect money from a friend, log today\'s spending. Or just type "remind me to pay rent on the 5th" in chat.' },
+    { icon: '💰', title: 'Money Received', desc: 'Salary, repayments and refunds from your bank SMS land on their own page. Record each one as income, a repayment or a refund — or let salary be added automatically.' },
+    { icon: '💬', title: 'Help & Feedback', desc: 'Report a bug or share an idea from inside the app, and get replies from the Spencheck team in your chats.' },
     { icon: '🏦', title: 'Wallet Transfers', desc: 'Move money between cash, bank, and UPI wallets and track the transfer history.' },
     { icon: '📤', title: 'Export CSV & PDF', desc: 'Share a full transaction CSV or a one-page PDF report for any time period via the system share sheet.' },
     { icon: '⚙️', title: 'Customisable Dashboard', desc: 'Drag and reorder sections on your home screen — show only what matters to you.' }
@@ -175,9 +179,12 @@ angular.module('spencheckApp', ['ngRoute'])
     'Monthly & weekly budget limits',
     'Named savings goals',
     'Lending & bill-split tracker',
+    'Friends & chat, with bill splits in chat',
+    'Reminders (one-off or repeating)',
+    'Money received from SMS (salary, repayments, refunds)',
     'Credit card manager',
     'Reports (weekly / monthly / yearly)',
-    'AI chat assistant (rule-based, offline)',
+    'Chat assistant (on-device commands, works offline)',
     'Subscriptions & loan EMI tracker',
     'Manual investment portfolio',
     'Receipt OCR & bank statement import',
@@ -190,7 +197,7 @@ angular.module('spencheckApp', ['ngRoute'])
   $scope.optionalFeatures = [
     'Firebase cloud backup & restore',
     'Bring-your-own Gemini or ChatGPT key for open-ended AI questions',
-    'Google Sign-In for cloud backup'
+    'Sign in with Google or email — only needed for cloud backup and Friends & chat'
   ];
 
   $scope.faqs = [
@@ -200,11 +207,11 @@ angular.module('spencheckApp', ['ngRoute'])
     },
     {
       q: 'What does "optional cloud backup" mean?',
-      a: 'By default Spencheck stores all your data locally on your device. Cloud backup is an opt-in feature: if you sign in with your email, you can push a full snapshot to Firebase and restore it on a new phone. It\'s completely optional — most users never need it.'
+      a: 'By default Spencheck stores all your data locally on your device. Cloud backup is an opt-in feature: if you sign in (with Google or email), you can push a full snapshot to Firebase and restore it on a new phone. It\'s completely optional — most users never need it.'
     },
     {
       q: 'Do I need a Gemini or ChatGPT key?',
-      a: 'No. The AI chat assistant works entirely offline using rule-based commands — you can add expenses, check budgets, see who owes you, and get weekly summaries without any API key. The key is only needed if you want to ask open-ended questions.'
+      a: 'No. The chat assistant works entirely offline using built-in commands — you can add expenses, set reminders, check budgets, see who owes you, and get weekly summaries without any API key. A key is only needed for open-ended questions, and it\'s your own key: Spencheck doesn\'t provide or pay for one.'
     }
   ];
 }])
@@ -219,6 +226,7 @@ angular.module('spencheckApp', ['ngRoute'])
     { id: 'budgets', label: 'Budgets & Goals', icon: '🎯' },
     { id: 'sms', label: 'SMS Detection', icon: '📱' },
     { id: 'ai', label: 'AI Assistant', icon: '🤖' },
+    { id: 'social', label: 'Friends & Chat', icon: '💬' },
     { id: 'privacy', label: 'Privacy & Data', icon: '🔒' },
     { id: 'sync', label: 'Sync & Backup', icon: '☁️' }
   ];
@@ -243,7 +251,7 @@ angular.module('spencheckApp', ['ngRoute'])
       items: [
         {
           q: 'What is Spencheck?',
-          a: 'Spencheck is a personal finance app for Android that helps you track every rupee you spend, set budgets, manage credit cards, track who owes you money, monitor your investments, and understand your financial habits — all in one place, and all stored privately on your phone.',
+          a: 'Spencheck is a personal finance app for Android that helps you track every rupee you spend, set budgets, manage credit cards, track who owes you money, monitor your investments, and understand your financial habits — all in one place, and all stored privately on your phone. Optionally, you can add friends, chat, and split bills with them.',
           open: false
         },
         {
@@ -253,7 +261,7 @@ angular.module('spencheckApp', ['ngRoute'])
         },
         {
           q: 'Do I need to create an account?',
-          a: 'No. Spencheck works fully offline without any account. An account (email/password via Firebase) is only required if you want to use the optional cloud backup feature to sync your data across devices.',
+          a: 'No. Spencheck works fully offline without any account. You only need to sign in (with Google or email) for two optional features: cloud backup, and Friends & chat.',
           open: false
         },
         {
@@ -296,7 +304,7 @@ angular.module('spencheckApp', ['ngRoute'])
         },
         {
           q: 'Can I set up recurring expenses?',
-          a: 'Yes. Go to Account → Recurring Expenses. Set a name, category, amount, and a day of the month. Spencheck will auto-log that expense on that day every month.',
+          a: 'Yes. Go to More → Recurring expenses. Set a name, category, amount, and a day of the month. Spencheck will auto-log that expense on that day every month.',
           open: false
         },
         {
@@ -306,7 +314,7 @@ angular.module('spencheckApp', ['ngRoute'])
         },
         {
           q: 'Can I import my bank statement?',
-          a: 'Yes. Go to Account → Import Bank Statement. Pick a CSV or PDF file from your bank, review the auto-detected transactions in a preview list, uncheck any you don\'t want to import, and tap Import. Transactions are auto-categorised using the same logic as manual entry.',
+          a: 'Yes. Go to More → Import bank statement. Pick a CSV or PDF file from your bank, review the auto-detected transactions in a preview list, uncheck any you don\'t want to import, and tap Import. Transactions are auto-categorised using the same logic as manual entry.',
           open: false
         }
       ]
@@ -318,12 +326,12 @@ angular.module('spencheckApp', ['ngRoute'])
       items: [
         {
           q: 'How do I set a budget?',
-          a: 'Go to Account → Budget & Savings Goal. Set an overall monthly spend cap, a weekly limit, and per-category budgets. A progress ring on the Budget screen turns from primary colour to amber at 80% usage and red at 100%, so you always know where you stand.',
+          a: 'Open Budget from the Home screen. Set an overall monthly spend cap, a weekly limit, and per-category budgets. A progress ring on the Budget screen turns from primary colour to amber at 80% usage and red at 100%, so you always know where you stand.',
           open: false
         },
         {
           q: 'What is the difference between a "Savings Goal" on the Budget screen and the "Goals" section?',
-          a: 'The Budget screen\'s Savings Goal is a single, auto-computed target (income minus spend) for the current month. The Goals section (Account → Goals) lets you create multiple, named goals like "Vacation Fund" or "New Phone," each manually funded by you whenever you add money toward them. Both exist independently.',
+          a: 'The Budget screen\'s Savings Goal is a single, auto-computed target (income minus spend) for the current month. The Goals section (More → Goals) lets you create multiple, named goals like "Vacation Fund" or "New Phone," each manually funded by you whenever you add money toward them. Both exist independently.',
           open: false
         },
         {
@@ -333,12 +341,12 @@ angular.module('spencheckApp', ['ngRoute'])
         },
         {
           q: 'Can I track subscriptions separately?',
-          a: 'Yes. Go to Account → Subscriptions. Add Netflix, Spotify, or any other recurring service. Spencheck shows your total combined monthly subscription cost, flags renewals due this week, and lets you mark them as renewed. Note: subscriptions are tracked separately from your main expense budget.',
+          a: 'Yes. Go to More → Subscriptions. Add Netflix, Spotify, or any other recurring service. Spencheck shows your total combined monthly subscription cost, flags renewals due this week, and lets you mark them as renewed. Note: subscriptions are tracked separately from your main expense budget.',
           open: false
         },
         {
           q: 'How does the loan EMI tracker work?',
-          a: 'Go to Account → Loans & EMIs. Add a loan with the principal, annual interest rate, tenure, and due date. Spencheck computes your EMI using the standard reducing-balance formula and shows a full month-by-month amortisation schedule. When you make a payment, tap "Mark EMI paid" to reduce the outstanding balance and log it as an expense.',
+          a: 'Go to More → Loans & EMIs. Add a loan with the principal, annual interest rate, tenure, and due date. Spencheck computes your EMI using the standard reducing-balance formula and shows a full month-by-month amortisation schedule. When you make a payment, tap "Mark EMI paid" to reduce the outstanding balance and log it as an expense.',
           open: false
         }
       ]
@@ -350,12 +358,17 @@ angular.module('spencheckApp', ['ngRoute'])
       items: [
         {
           q: 'What is SMS expense detection?',
-          a: 'On Android, Spencheck reads your bank and UPI debit SMS alerts and automatically suggests them as expenses. A battle-tested regex engine tuned across 35+ Indian banks extracts the amount, merchant, and UPI app — all parsing happens on-device with nothing leaving your phone.',
+          a: 'On Android, Spencheck reads your bank and UPI SMS alerts on your phone. Purchases become expenses, and money coming in (salary, repayments, refunds) goes to its own Money received page. A regex engine tuned across 35+ Indian banks extracts the amount, merchant and account — all parsing happens on-device, with nothing leaving your phone.',
           open: false
         },
         {
           q: 'Does Spencheck auto-add expenses from SMS without asking?',
-          a: 'Mostly yes for repeat merchants, with your explicit confirmation for new ones. If the merchant has been logged before with the same category, Spencheck auto-adds it silently and shows an undoable notification. For new merchants, the transaction appears in a "Pending" review queue on the Dashboard for you to accept or dismiss.',
+          a: 'Only when it\'s sure. With "Add trusted transactions automatically" on (it\'s on by default, in SMS review), confirmed purchases from recognised bank senders are saved straight to Expenses with an Undo, and you\'re asked to pick a category when the merchant is unfamiliar. Anything Spencheck isn\'t sure about waits in SMS review for you to accept or dismiss. Turn the switch off to review everything yourself.',
+          open: false
+        },
+        {
+          q: 'What happens to money I receive?',
+          a: 'Incoming money is often not income — a friend paying you back, a shop refund, or a transfer between your own accounts. So each one waits on the Money received page (also linked from Home and the Income tab), where you record it as income, a Lending repayment, or a refund. Turn on "Add income automatically" there to have salary, and senders you\'ve confirmed as income before, added on their own.',
           open: false
         },
         {
@@ -373,7 +386,7 @@ angular.module('spencheckApp', ['ngRoute'])
       items: [
         {
           q: 'What can I ask the AI assistant?',
-          a: 'The assistant handles two kinds of requests. Actions: "Add ₹450 for groceries," "Lent ₹500 to Rahul," "Mark ₹200 received from Priya." Queries: "How much did I spend this week?", "What\'s my budget remaining?", "Who owes me money?", "Show my top categories this month."',
+          a: 'The assistant handles two kinds of requests. Actions: "Add ₹450 for groceries," "Lent ₹500 to Rahul," "Mark ₹200 received from Priya," "Remind me to pay rent on the 5th." Queries: "How much did I spend this week?", "What\'s my budget remaining?", "Who owes me money?", "Show my top categories this month."',
           open: false
         },
         {
@@ -383,12 +396,49 @@ angular.module('spencheckApp', ['ngRoute'])
         },
         {
           q: 'What is the "bring your own key" option?',
-          a: 'If you want to ask open-ended questions beyond standard commands (e.g. "Give me tips to cut food spending"), you can paste your own Gemini or ChatGPT API key in Account → Cloud AI Provider. Spencheck will use your key for those questions. Without a key, open-ended questions just fall back to the offline rule-based responses.',
+          a: 'If you want to ask open-ended questions beyond standard commands (e.g. "Give me tips to cut food spending"), you can paste your own Gemini or ChatGPT API key in More → Cloud AI provider. Spencheck will use your key for those questions — Spencheck doesn\'t provide one or charge for AI. Without a key, open-ended questions just fall back to the offline rule-based responses.',
           open: false
         },
         {
           q: 'Is my financial data sent to Google or OpenAI?',
-          a: 'Only if you configure a cloud AI key. With a key set, the text of your messages (which may include expense notes, amounts, and merchant names) is sent to Google\'s or OpenAI\'s servers under their respective privacy policies. Without a key, nothing related to chat ever leaves your device.',
+          a: 'Only if you configure a cloud AI key. With a key set, your message and the figures needed to answer it (which may include expense notes, amounts, and merchant names) go straight from your phone to Google\'s or OpenAI\'s servers under their respective privacy policies — never through Spencheck\'s servers. Without a key, nothing you type in the assistant leaves your device.',
+          open: false
+        }
+      ]
+    },
+    {
+      id: 'social',
+      title: 'Friends & Chat',
+      icon: '💬',
+      items: [
+        {
+          q: 'What is Friends & chat?',
+          a: 'An optional way to keep in touch with the people you share money with. Pick a @username, add friends, and chat one-to-one or in groups. It lives in the Social tab, and you need to sign in (Google or email) to use it.',
+          open: false
+        },
+        {
+          q: 'How do I add a friend?',
+          a: 'Search for their @username, or scan the QR code on their profile. You can also share your username with a link to the app. They\'ll get a friend request to accept.',
+          open: false
+        },
+        {
+          q: 'Can I split a bill in a chat?',
+          a: 'Yes. Tap "Split a bill" in any chat or group. Everyone sees their share, and each person taps "Mark paid" when they\'ve paid you back. You can record splits and repayments in Lending with one tap. Spencheck never moves money — the cards are records between friends.',
+          open: false
+        },
+        {
+          q: 'Can friends see my expenses?',
+          a: 'No. Friends see only your display name and @username, and the messages you send them. Your expenses, budgets, cards and balances stay on your phone.',
+          open: false
+        },
+        {
+          q: 'What happens to photos I send?',
+          a: 'Photos are compressed on your phone before sending and deleted from our servers automatically 7 days after they were sent.',
+          open: false
+        },
+        {
+          q: 'What if someone bothers me?',
+          a: 'Block them and they can\'t send you friend requests or one-to-one messages. You can also report a person or a message — reports are reviewed by the Spencheck team.',
           open: false
         }
       ]
@@ -400,17 +450,17 @@ angular.module('spencheckApp', ['ngRoute'])
       items: [
         {
           q: 'Where is my data stored?',
-          a: 'All your data is stored in a local SQLite database on your device. It never leaves your phone unless you explicitly enable cloud backup.',
+          a: 'All your data is stored in an encrypted local SQLite database on your device. It never leaves your phone unless you explicitly enable cloud backup, share a wallet, or add your own Cloud AI key. If you use Friends & chat, your username and the messages you send are stored on our servers so your friends can read them — your expenses and balances are never shared through it.',
           open: false
         },
         {
           q: 'Can I lock the app?',
-          a: 'Yes. Go to Account → App Lock PIN to set a 4-digit PIN. After 3 wrong attempts, the input locks for 30 seconds (doubling with each further failure). You can also enable fingerprint or Face ID as a quick-unlock shortcut.',
+          a: 'Yes. Go to More → App lock PIN to set a PIN of 4 or more digits. After 3 wrong attempts, the input locks for 30 seconds (doubling with each further failure). You can also enable fingerprint or face unlock as a quick-unlock shortcut.',
           open: false
         },
         {
           q: 'How do I delete all my data?',
-          a: 'Account → Clear All Data wipes all local data from your device. If you also want to delete your cloud backup and account, use Account → Delete Account instead — this removes your Firestore data, Firebase Auth account, and all local data in one step.',
+          a: 'More → Clear all data wipes all local data from your device. If you also want to delete your cloud backup and account, use More → Delete account instead — this removes your Friends & chat data (username, friends, chats and the messages you sent), your feedback messages, your cloud backup, your sign-in account, and all local data in one step.',
           open: false
         },
         {
@@ -427,7 +477,12 @@ angular.module('spencheckApp', ['ngRoute'])
       items: [
         {
           q: 'How does cloud backup work?',
-          a: 'Go to Account → Cloud Backup. Sign in with your email and password, then tap "Backup Now." Spencheck pushes a full snapshot of your local data to Firebase Firestore under your account. To restore it on a new phone, sign in and tap "Restore." This is a one-shot backup/restore — not continuous sync.',
+          a: 'Go to More → Cloud backup. Sign in with Google or your email, then tap "Backup now." Spencheck pushes a full snapshot of your local data to Firebase Firestore under your account. To restore it on a new phone, sign in and tap "Restore." This is a one-shot backup/restore — not continuous sync.',
+          open: false
+        },
+        {
+          q: 'Can I encrypt my backup?',
+          a: 'Yes. In Cloud backup, set up backup encryption with a passphrase. Backups are then encrypted on your phone before upload, and you get a recovery code — keep it safe, because without the passphrase or recovery code an encrypted backup can\'t be restored.',
           open: false
         },
         {
@@ -457,7 +512,7 @@ angular.module('spencheckApp', ['ngRoute'])
   ];
 
   $scope.requirements = [
-    { icon: '📱', label: 'Android 7.0+', sub: 'required' },
+    { icon: '📱', label: 'Android 6.0+', sub: 'required' },
     { icon: '💾', label: '~80 MB', sub: 'storage required' },
     { icon: '🌐', label: 'Offline-first', sub: 'no internet needed' }
   ];
@@ -489,8 +544,8 @@ angular.module('spencheckApp', ['ngRoute'])
       },
       {
         img: 'expenses.png',
-        label: 'Expenses',
-        desc: 'Full transaction list with search, filter by category or date, and swipe to edit.'
+        label: 'Activity',
+        desc: 'Every expense and income, grouped by day — search, filter by category or date, and swipe to edit.'
       },
       {
         img: 'add_expense.png',
@@ -499,8 +554,8 @@ angular.module('spencheckApp', ['ngRoute'])
       },
       {
         img: 'sms_detect.png',
-        label: 'SMS Detection',
-        desc: 'Android auto-reads your bank SMS alerts and queues detected transactions for one-tap confirmation.'
+        label: 'SMS Review',
+        desc: 'Android reads your bank SMS alerts. Trusted purchases are added automatically; anything unsure waits here for one tap.'
       },
       {
         img: 'subscriptions.png',
@@ -526,8 +581,8 @@ angular.module('spencheckApp', ['ngRoute'])
       },
       {
         img: 'gamification.png',
-        label: 'Gamification',
-        desc: 'Streaks, milestones, and achievements that reward consistent tracking habits.'
+        label: 'Trophy Room',
+        desc: 'Levels, streaks and badges that reward consistent tracking habits.'
       },
     ],
     reports: [
@@ -543,8 +598,8 @@ angular.module('spencheckApp', ['ngRoute'])
       },
       {
         img: 'wrap.png',
-        label: 'Year in Review',
-        desc: 'An animated annual wrap-up showing your top categories, biggest splurge, and savings highlights.'
+        label: 'Monthly Wrap',
+        desc: 'A shareable monthly wrap-up with your top category, biggest expense, savings and no-spend days.'
       },
     ],
     money: [
@@ -587,8 +642,18 @@ angular.module('spencheckApp', ['ngRoute'])
     more: [
       {
         img: 'chat.png',
-        label: 'AI Chat',
-        desc: '"Add ₹450 food" — the assistant logs it instantly. Upgrade with your own Gemini or ChatGPT key.'
+        label: 'Ask Spencheck',
+        desc: '"Add ₹450 food" — the assistant logs it instantly and answers summaries with charts. Add your own Gemini or ChatGPT key for open-ended questions.'
+      },
+      {
+        img: 'social.png',
+        label: 'Friends & Chat',
+        desc: 'Chat with friends and groups, split a bill right in the chat, and see who has paid — all optional.'
+      },
+      {
+        img: 'reminders.png',
+        label: 'Reminders',
+        desc: 'Pay rent, collect from a friend, renew a subscription — one-off or repeating reminders in one list.'
       },
     ],
   };

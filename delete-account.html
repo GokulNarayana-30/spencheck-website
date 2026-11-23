@@ -80,7 +80,7 @@
   <h1>Delete Your Account</h1>
   <p class="intro">Sign in below to permanently delete your Spencheck account and all associated cloud data — no app install needed.</p>
 
-  <div class="warn">This is permanent and cannot be undone. It removes your Firestore backup data, your Firebase Authentication account, and any shared-wallet entries you own.</div>
+  <div class="warn">This is permanent and cannot be undone. It removes your username, friends, chats and messages you sent, your feedback messages, your cloud backup, your sign-in account, and any shared-wallet entries you own. Photos you sent in chats are removed from our servers within 7 days.</div>
 
   <!-- Step 1: sign in -->
   <div class="card" id="signin-card">
@@ -159,7 +159,26 @@
     'savings_goals', 'subscriptions', 'loans', 'investments', 'incomes',
     'recurring_expenses', 'tags', 'expense_tags', 'chat_sessions',
     'chat_messages', 'custom_keywords',
+    // Refund history and bank-statement links (schema v35, backed up too).
+    'expense_refunds', 'statement_links',
+    // Not a table: reminders backup (users/{uid}/extras/reminders), 2026-11-19.
+    'extras',
   ];
+
+  // Friends & chat, feedback and AI usage live on Supabase (2026-11-19).
+  // Same function the app's Delete account calls; it authenticates with
+  // this Firebase sign-in. The key below is the public "publishable" key.
+  const SUPABASE_URL = 'https://jmnuzfrtpinwaeylxrbp.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_iRO4WGQea5m0Hh2qE4bcOg_zr-eeWct';
+  async function deleteSupabaseData(user) {
+    const token = await user.getIdToken(true);
+    const res = await fetch(SUPABASE_URL + '/rest/v1/rpc/delete_my_social_data', {
+      method: 'POST',
+      headers: { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+      body: '{}',
+    });
+    if (!res.ok) throw new Error('Could not delete your chat and feedback data (' + res.status + ')');
+  }
 
   const signinCard = document.getElementById('signin-card');
   const deleteCard = document.getElementById('delete-card');
@@ -182,7 +201,10 @@
   confirmCheck.addEventListener('change', updateDeleteButtonState);
   confirmText.addEventListener('input', updateDeleteButtonState);
 
+  let deletionCompleted = false;
+
   auth.onAuthStateChanged((user) => {
+    if (deletionCompleted) return;
     if (user) {
       signinCard.classList.add('hidden');
       deleteCard.classList.remove('hidden');
@@ -220,13 +242,10 @@
     await auth.signOut();
   });
 
-  // Deletes every doc in users/{uid}/{table} in batches of <=450, mirroring
-  // SyncService.deleteAllCloudData's own batch cap (Firestore's real limit
-  // is 500 writes/batch).
-  async function deleteSubcollection(uid, table) {
-    const colRef = db.collection('users').doc(uid).collection(table);
-    // Loop in pages since a single get() could exceed batch limits for a
-    // very large table.
+  // Deletes every doc in a collection/subcollection in batches of <=450,
+  // mirroring SyncService.deleteAllCloudData's own batch cap (Firestore's real
+  // limit is 500 writes/batch).
+  async function deleteCollectionDocs(colRef) {
     while (true) {
       const snapshot = await colRef.limit(450).get();
       if (snapshot.empty) return;
@@ -236,19 +255,45 @@
     }
   }
 
+  async function deleteSubcollection(uid, table) {
+    await deleteCollectionDocs(db.collection('users').doc(uid).collection(table));
+  }
+
   async function deleteSharedWalletsOwnedBy(uid) {
     const snapshot = await db.collection('shared_wallets').where('ownerUid', '==', uid).get();
     if (snapshot.empty) return;
-    const batch = db.batch();
-    snapshot.docs.forEach((doc) => batch.delete(doc.ref));
-    await batch.commit();
+    for (const walletDoc of snapshot.docs) {
+      await deleteCollectionDocs(walletDoc.ref.collection('transactions'));
+    }
+    for (let i = 0; i < snapshot.docs.length; i += 450) {
+      const batch = db.batch();
+      snapshot.docs.slice(i, i + 450).forEach((doc) => batch.delete(doc.ref));
+      await batch.commit();
+    }
   }
 
   deleteBtn.addEventListener('click', async () => {
     const user = auth.currentUser;
     if (!user) return;
+    const lastSignInMs = user.metadata && user.metadata.lastSignInTime
+      ? Date.parse(user.metadata.lastSignInTime)
+      : NaN;
+    if (!Number.isFinite(lastSignInMs) || Date.now() - lastSignInMs > 4 * 60 * 1000) {
+      await auth.signOut();
+      showStatus(
+        signinStatus,
+        'For security, please sign in again right before deleting — your session is older than 5 minutes.',
+        'error',
+      );
+      return;
+    }
     deleteBtn.disabled = true;
     try {
+      // First, while the sign-in still exists: if this fails we stop here,
+      // so the user can simply try again.
+      showStatus(deleteStatus, 'Deleting your chats, friends and feedback…', 'info');
+      await deleteSupabaseData(user);
+
       showStatus(deleteStatus, 'Deleting your data…', 'info');
       for (const table of TABLES) {
         await deleteSubcollection(user.uid, table);
@@ -260,11 +305,14 @@
       await db.collection('users').doc(user.uid).delete();
 
       showStatus(deleteStatus, 'Deleting your sign-in account…', 'info');
+      deletionCompleted = true;
       await user.delete();
 
+      signinCard.classList.add('hidden');
       deleteCard.classList.add('hidden');
       doneCard.classList.remove('hidden');
     } catch (err) {
+      deletionCompleted = false;
       if (err.code === 'auth/requires-recent-login') {
         showStatus(
           deleteStatus,

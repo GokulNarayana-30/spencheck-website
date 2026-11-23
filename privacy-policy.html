@@ -49,17 +49,18 @@
   </a>
 
   <h1>Privacy Policy for Spencheck</h1>
-  <div class="meta">Effective date: September 10, 2026</div>
+  <div class="meta">Effective date: November 19, 2026</div>
   <p class="intro">Spencheck is built to work entirely on your device. This page explains exactly what data the app touches, where it's stored, and what — if anything — ever leaves your phone.</p>
 
   <h2>What stays on your device</h2>
   <p>Everything you enter — expenses, categories, budgets, credit cards, lending records, wallets, income, savings goals, tags, subscriptions, loans, and investments — is stored locally and protected by AES-256 SQLCipher encryption. None of it is sent anywhere unless you explicitly turn on Cloud backup.</p>
   <p>Android only: by default, the app blocks screenshots, screen recording, and hides its content from the recent-apps preview, since your balances and card details are sensitive. You can turn this off from Account &gt; Security &amp; backup if you want to take a screenshot or record your screen yourself.</p>
-  <p>SMS auto-detection (Android only): the app reads bank/UPI debit-alert messages on-device to suggest expenses. The message text itself is never stored or uploaded — only the amount, merchant name, and date the app extracts from it, and only after you accept or the app auto-logs a repeat merchant. You can grant or revoke SMS permission at any time from your phone's system settings.</p>
+  <p>On Android, Spencheck reads bank and UPI debit and credit alerts on your device. The local review history stores extracted payment details including the amount, merchant or sender, date, masked account suffix and bank reference. Trusted purchases can be saved automatically. You choose how to record incoming money. Optional backups include saved financial entries, their bank references and identifiers that prevent repeat imports. Raw SMS and pending credit reviews stay on your device. You can turn off auto-add in SMS review or revoke SMS permission in your phone’s settings.</p>
   <p>Receipt scanning uses Google ML Kit's on-device text recognition — a photo you take is processed on your phone and never uploaded anywhere.</p>
   <p>Importing a bank statement (CSV or PDF, Account &gt; Import bank statement) is parsed entirely on your phone — the file itself is never uploaded anywhere, only the transactions you choose to import from it get saved to your expense history.</p>
   <p>Android only: to show which UPI apps you have installed for the "Pay via UPI" picker, the app checks your device's installed apps for known UPI-capable ones. This check never leaves your phone.</p>
-  <p>The chat assistant answers common commands (adding an expense, checking your budget, lending status, and more) instantly on-device — nothing is sent anywhere for these. If you optionally add your own Gemini or ChatGPT API key in Account &gt; Cloud AI provider, open-ended questions you type are sent to that provider's servers to generate a reply, under their own privacy policy, not ours. With no key set, chat never sends anything off your phone.</p>
+  <p>The chat assistant answers common commands (adding an expense, checking your budget, lending status, and more) instantly on-device — nothing is sent anywhere for these. If you optionally add your own Gemini or ChatGPT API key in Account &gt; Cloud AI provider, open-ended questions you type are sent to that provider's servers to generate a reply, under their own privacy policy, not ours. With no key set, chat never sends anything off your phone. Anything the assistant changes in your data needs your confirmation first.</p>
+  <p>Reminders you create, your notification settings, the in-app notification inbox and refund notes are stored on your device. Reminders are included in Cloud backup if you turn it on.</p>
   <p>If you pick a contact to log who you lent money to, the app reads only that one contact's name via your phone's native contact picker — it never requests broad access to your contacts and never scans or lists your full contact book. You can type a phone number in yourself if you want to save one. This data is used strictly on-device and is never uploaded, shared, or stored on our servers.</p>
   <p>A PIN or biometric app-lock, and any saved sign-in credentials for fingerprint unlock, are stored securely in your device's hardware keystore.</p>
 
@@ -68,9 +69,20 @@
 
 • Google Firebase (Authentication, Firestore, Cloud Messaging) — used for sign-in, optional Cloud backup, wallet sharing, and push notifications, all described below. Governed by Google's Privacy Policy.
 
-• Google Gemini or OpenAI ChatGPT — only if you add your own API key in Account &gt; Cloud AI provider, and only the open-ended chat message you type at that moment. Governed by that provider's own privacy policy, not ours.
+• Supabase — our database provider for the optional Friends &amp; chat features, Help &amp; feedback messages, and announcements from the Spencheck team. Supabase processes this data on our behalf.
 
-• Formspree — only if you use Account &gt; Help &amp; feedback to send us a message. The message text, and your email address if you choose to include one, is sent to Formspree so we can read (and optionally reply to) it. Governed by Formspree's own privacy policy, not ours.</p>
+• Google Gemini or OpenAI ChatGPT — only if you add your own API key in Account &gt; Cloud AI provider. This covers the open-ended chat message you type <em>and</em> the financial data the assistant looks up to answer it (spending summaries, budgets, card dues, lending balances, matching expenses), which is sent back to the provider as part of the same conversation. Governed by that provider's own privacy policy, not ours.
+
+• Formspree — only as a fallback for Help &amp; feedback when our own server can't be reached or you're signed out. Governed by Formspree's own privacy policy, not ours.</p>
+
+  <h2>Friends &amp; chat (only if you use it)</h2>
+  <p>Friends &amp; chat is optional. When you pick a @username, it and your display name become visible to other signed-in Spencheck users so they can find and add you. Your expenses, budgets and other money data are never shared through it.</p>
+  <p>Messages, photos and split/payment cards you send are stored on our Supabase servers so the people in that chat can read them; only members of a chat can read it. Photos are compressed on your phone before sending and automatically deleted from our servers 7 days after they were sent. When you record a split in Lending, that record stays on your device.</p>
+  <p>The Spencheck team may message you from the verified "Spencheck" account in your chats; replies you send there are read by the team.</p>
+  <p>You can block anyone and report people or messages. Reports are reviewed by us and are kept even if either account is later deleted.</p>
+
+  <h2>Help &amp; feedback</h2>
+  <p>Messages you send from Help &amp; feedback (and your email address, if you include it) are stored on our Supabase servers with your app version and platform, so we can read and reply — in the Spencheck chat or by email.</p>
 
   <h2>What Cloud backup sends (only if you turn it on)</h2>
   <p>Cloud backup is off by default. If you sign in and turn it on, a copy of your categories, expenses, lending records, budgets, credit cards, wallets, savings goals, subscriptions, loans, investments, income, recurring expenses, tags, chat history, and auto-categorisation keywords is stored in Google Firebase (Firestore), tied to your account. SMS scan history (which messages have already been reviewed) always stays device-only, even with backup on.</p>
@@ -78,6 +90,7 @@
   <p>You can turn Cloud backup off, or delete your account entirely, from Account → Cloud backup / Delete account at any time.</p>
 
   <h2>Push notifications</h2>
+  <p>If you use Friends &amp; chat, this device's push token is also stored on our Supabase servers so chat messages, friend requests and announcements from the Spencheck team can reach this device. Announcements sent to everyone use a general topic that every install subscribes to.</p>
   <p>If you sign in, this device's Firebase Cloud Messaging token is stored under your account in Firestore so a push notification (e.g. a wallet shared with you updating) can be delivered to this device. Signing out clears this token. This is separate from the reminder notifications Spencheck schedules entirely on-device (budget/payday/card-due alerts) — those never involve Firebase at all.</p>
 
   <h2>Wallet sharing</h2>
@@ -96,7 +109,7 @@
   3. Scroll down and tap "Delete account".<br>
   4. Confirm the deletion when prompted.</p>
   <p><strong>From the web, without the app installed</strong> — email <a href="mailto:mgokulnarayana@gmail.com?subject=Account%20Deletion%20Request">mgokulnarayana@gmail.com</a> from your registered email address with the subject "Account Deletion Request." We'll verify the request and delete your account within 30 days.</p>
-  <p>Either method permanently removes, in order: your Firestore backup data, your Firebase Authentication account, and every local table on the device you had the app installed on. This cannot be undone. See the dedicated <a href="delete-account.html">Delete Your Account</a> page for the same steps.</p>
+  <p>Either method permanently removes: your Friends &amp; chat data on Supabase (username, friends, chats, the messages you sent, blocks you made, your push tokens), your Help &amp; feedback messages, your Firestore backup data, your Firebase Authentication account, and everything stored on the device you had the app installed on (including reminders and notification history). Photos you sent are removed from our servers within 7 days. This cannot be undone. See the dedicated <a href="delete-account.html">Delete Your Account</a> page for the same steps.</p>
   <h2>Changes to this policy</h2>
   <p>We may update this Privacy Policy from time to time. Changes will be posted on this page and reflected in the "Effective date" above.</p>
 
