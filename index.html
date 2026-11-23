@@ -1,24 +1,47 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="spencheckApp">
+<html lang="en" ng-app="spencheckApp" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Spencheck — Track Your Spending, Smarter</title>
-  <meta name="description" content="Spencheck is the all-in-one personal finance app for Indians. Track expenses, set budgets, manage credit cards, split bills, and grow your savings — all in one place." />
+  <meta name="description" content="Spencheck is the all-in-one personal finance app for India. Track expenses, auto-detect bank SMS, set smart budgets, split bills in chat, and grow your net worth — offline-first and 100% free." />
+
+  <!-- Instant saved-theme restore before first paint -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('spencheck_theme');
+        if (t === 'light' || t === 'dark') {
+          document.documentElement.setAttribute('data-theme', t);
+        }
+      } catch (_) {}
+    })();
+  </script>
 
   <!-- Google Fonts: Sora + Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- AngularJS 1.8.3 + ngRoute -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular-route.min.js"></script>
 
   <!-- Global Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=2" />
+  <link rel="stylesheet" href="styles.css?v=5" />
 </head>
 <body>
+
+  <!-- Scroll Progress Hairline -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Ambient Aurora Backdrop -->
+  <div class="ambient-backdrop" aria-hidden="true">
+    <div class="aurora-grid"></div>
+    <div class="aurora-orb aurora-orb-1"></div>
+    <div class="aurora-orb aurora-orb-2"></div>
+    <div class="aurora-orb aurora-orb-3"></div>
+  </div>
 
   <!-- ===== NAVBAR ===== -->
   <nav class="navbar" ng-controller="NavController">
@@ -28,22 +51,33 @@
         <span class="logo-text">Spencheck</span>
       </a>
 
-      <button class="nav-toggle" ng-click="menuOpen = !menuOpen" aria-label="Toggle menu">
-        <span class="hamburger" ng-class="{'open': menuOpen}">
-          <span></span><span></span><span></span>
-        </span>
-      </button>
-
       <ul class="nav-links" ng-class="{'nav-open': menuOpen}">
         <li><a href="#!/" ng-click="menuOpen=false" ng-class="{'active': isActive('/')}">Home</a></li>
         <li><a href="#!/features" ng-click="menuOpen=false" ng-class="{'active': isActive('/features')}">Features</a></li>
-        <li><a href="#!/guide" ng-click="menuOpen=false" ng-class="{'active': isActive('/guide')}">Guide</a></li>
+        <li><a href="#!/guide" ng-click="menuOpen=false" ng-class="{'active': isActive('/guide')}">App Guide</a></li>
         <li><a href="#!/pricing" ng-click="menuOpen=false" ng-class="{'active': isActive('/pricing')}">Pricing</a></li>
         <li><a href="#!/faq" ng-click="menuOpen=false" ng-class="{'active': isActive('/faq')}">FAQ</a></li>
-        <li class="nav-cta-item">
-          <a href="#!/download" class="btn btn-primary nav-cta" ng-click="menuOpen=false">Download Free</a>
-        </li>
       </ul>
+
+      <div class="nav-actions-right">
+        <button class="theme-toggle-btn" id="theme-toggle" type="button"
+                ng-click="toggleTheme()"
+                ng-attr-aria-label="{{theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}}"
+                ng-attr-title="{{theme === 'dark' ? 'Light mode' : 'Dark mode'}}">
+          <span ng-if="theme === 'dark'">☀️</span>
+          <span ng-if="theme !== 'dark'">🌙</span>
+        </button>
+
+        <a href="#!/download" class="btn btn-primary nav-cta btn-magnetic" ng-click="menuOpen=false">
+          ⬇ Download Free
+        </a>
+
+        <button class="nav-toggle" type="button" ng-click="menuOpen = !menuOpen" aria-label="Toggle menu">
+          <span class="hamburger" ng-class="{'open': menuOpen}">
+            <span></span><span></span><span></span>
+          </span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -51,6 +85,39 @@
   <main>
     <div ng-view></div>
   </main>
+
+  <!-- ===== GLOBAL SCREENSHOT LIGHTBOX ===== -->
+  <div class="lightbox-overlay" ng-if="lightbox.open" ng-click="closeLightbox()">
+    <div class="lightbox-shell" ng-click="$event.stopPropagation()">
+      <button class="lightbox-close" type="button" ng-click="closeLightbox()" aria-label="Close preview">✕</button>
+
+      <div class="phone-hardware md">
+        <div class="phone-camera-dot"></div>
+        <div class="phone-hardware-inner">
+          <img ng-src="assets/screenshots/{{lightbox.items[lightbox.index].img}}"
+               alt="{{lightbox.items[lightbox.index].label}}" />
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label" style="margin-bottom:12px;" ng-if="lightbox.items[lightbox.index].category">
+          {{lightbox.items[lightbox.index].category}}
+        </div>
+        <h3 style="font-size:clamp(22px, 3vw, 30px); margin-bottom:12px;">
+          {{lightbox.items[lightbox.index].label}}
+        </h3>
+        <p style="font-size:15px; color:var(--text-secondary); line-height:1.7;">
+          {{lightbox.items[lightbox.index].desc}}
+        </p>
+
+        <div class="lightbox-nav" ng-if="lightbox.items.length > 1">
+          <button class="lightbox-nav-btn" type="button" ng-click="prevLightbox()">← Prev</button>
+          <button class="lightbox-nav-btn" type="button" ng-click="nextLightbox()">Next →</button>
+          <span class="lightbox-counter">{{lightbox.index + 1}} / {{lightbox.items.length}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
@@ -62,7 +129,7 @@
             <span class="footer-logo-text">Spencheck</span>
           </a>
           <p class="footer-tagline">Track your spending, smarter.</p>
-          <p class="footer-sub">A personal finance app built for India — completely private, fully offline-first, and yours.</p>
+          <p class="footer-sub">A personal finance companion built for India — offline-first, AES-256 encrypted locally, zero ads, and completely free.</p>
         </div>
 
         <div class="footer-links-grid">
@@ -70,32 +137,32 @@
             <h4>Product</h4>
             <ul>
               <li><a href="#!/features">All Features</a></li>
-              <li><a href="#!/features">Expense Tracking</a></li>
-              <li><a href="#!/features">Budgets &amp; Goals</a></li>
-              <li><a href="#!/features">Reports</a></li>
-              <li><a href="#!/pricing">Pricing</a></li>
+              <li><a href="#!/guide">32-Screen App Guide</a></li>
+              <li><a href="#!/pricing">Pricing (₹0 Forever)</a></li>
+              <li><a href="#!/faq">FAQ</a></li>
             </ul>
           </div>
           <div class="footer-col">
-            <h4>More</h4>
+            <h4>Highlights</h4>
             <ul>
-              <li><a href="#!/features">AI Assistant</a></li>
-              <li><a href="#!/features">Lending Tracker</a></li>
-              <li><a href="#!/features">Investments</a></li>
-              <li><a href="#!/faq">FAQ</a></li>
+              <li><a href="#!/features#expenses">Expense &amp; SMS Tracking</a></li>
+              <li><a href="#!/features#budgets">Budgets &amp; Bills Calendar</a></li>
+              <li><a href="#!/features#friends-chat">Friends &amp; In-Chat Splits</a></li>
+              <li><a href="#!/features#chat">Ask Spencheck AI</a></li>
             </ul>
           </div>
           <div class="footer-col">
             <h4>Download</h4>
             <ul>
-              <li><a href="#!/download">Android APK</a></li>
+              <li><a href="#!/download">Android (Google Play)</a></li>
+              <li><a href="https://play.google.com/store/apps/details?id=com.spencheck.spencheck" target="_blank" rel="noopener">Play Store Listing →</a></li>
             </ul>
           </div>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p class="footer-copy">&copy; 2026 Spencheck. All rights reserved. Your data stays on your device.</p>
+        <p class="footer-copy">&copy; 2026 Spencheck. All rights reserved. Your money data stays on your device.</p>
         <div class="footer-legal">
           <a href="privacy-policy.html">Privacy Policy</a>
           <a href="terms-of-service.html">Terms of Service</a>
@@ -105,166 +172,8 @@
     </div>
   </footer>
 
-  <!-- Inline template: guide.html — pre-cached so file:// protocol works without XHR -->
-  <script type="text/ng-template" id="views/guide.html">
-<!-- Hero -->
-<section class="features-hero">
-  <div class="container">
-    <div class="section-label">App guide</div>
-    <h1 class="section-title">See every screen, before you download</h1>
-    <p class="section-subtitle" style="margin:16px auto 0; max-width:560px; color:var(--text-secondary);">
-      A visual walkthrough of Spencheck — every major screen, exactly as it looks on your phone.
-    </p>
-    <div class="features-nav-tabs">
-      <button class="tab-pill" ng-repeat="t in guideTabs"
-              ng-class="{'active': activeGuideTab === t.id}"
-              ng-click="setGuideTab(t.id)">
-        {{t.label}}
-      </button>
-    </div>
-  </div>
-</section>
-
-<!-- TRACKING -->
-<section class="guide-section" ng-show="activeGuideTab === 'all' || activeGuideTab === 'tracking'">
-  <div class="container">
-    <div class="guide-section-header">
-      <div class="section-label">Expense Tracking</div>
-      <h2 class="section-title">The core: logging money out</h2>
-    </div>
-    <div class="guide-grid">
-      <div class="guide-card" ng-repeat="s in guideScreens.tracking">
-        <div class="guide-phone-wrap">
-          <div class="guide-phone-glow"></div>
-          <div class="guide-phone-frame">
-            <div class="guide-phone-notch"></div>
-            <div class="guide-phone-screen">
-              <img ng-src="assets/screenshots/{{s.img}}" alt="{{s.label}}" />
-            </div>
-          </div>
-        </div>
-        <div class="guide-card-label">{{s.label}}</div>
-        <div class="guide-card-desc">{{s.desc}}</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BUDGETS & GOALS -->
-<section class="guide-section" style="background:var(--base);" ng-show="activeGuideTab === 'all' || activeGuideTab === 'budgets'">
-  <div class="container">
-    <div class="guide-section-header">
-      <div class="section-label">Budgets &amp; Goals</div>
-      <h2 class="section-title">Spend limits that actually stick</h2>
-    </div>
-    <div class="guide-grid">
-      <div class="guide-card" ng-repeat="s in guideScreens.budgets">
-        <div class="guide-phone-wrap">
-          <div class="guide-phone-glow" style="background:radial-gradient(circle,rgba(247,144,9,.25) 0%,transparent 70%);"></div>
-          <div class="guide-phone-frame">
-            <div class="guide-phone-notch"></div>
-            <div class="guide-phone-screen">
-              <img ng-src="assets/screenshots/{{s.img}}" alt="{{s.label}}" />
-            </div>
-          </div>
-        </div>
-        <div class="guide-card-label">{{s.label}}</div>
-        <div class="guide-card-desc">{{s.desc}}</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- REPORTS & INSIGHTS -->
-<section class="guide-section" ng-show="activeGuideTab === 'all' || activeGuideTab === 'reports'">
-  <div class="container">
-    <div class="guide-section-header">
-      <div class="section-label">Reports &amp; Insights</div>
-      <h2 class="section-title">Understand your money</h2>
-    </div>
-    <div class="guide-grid">
-      <div class="guide-card" ng-repeat="s in guideScreens.reports">
-        <div class="guide-phone-wrap">
-          <div class="guide-phone-glow" style="background:radial-gradient(circle,rgba(18,183,106,.25) 0%,transparent 70%);"></div>
-          <div class="guide-phone-frame">
-            <div class="guide-phone-notch"></div>
-            <div class="guide-phone-screen">
-              <img ng-src="assets/screenshots/{{s.img}}" alt="{{s.label}}" />
-            </div>
-          </div>
-        </div>
-        <div class="guide-card-label">{{s.label}}</div>
-        <div class="guide-card-desc">{{s.desc}}</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MONEY MANAGEMENT -->
-<section class="guide-section" style="background:var(--base);" ng-show="activeGuideTab === 'all' || activeGuideTab === 'money'">
-  <div class="container">
-    <div class="guide-section-header">
-      <div class="section-label">Money Management</div>
-      <h2 class="section-title">Cards, lending &amp; investments</h2>
-    </div>
-    <div class="guide-grid">
-      <div class="guide-card" ng-repeat="s in guideScreens.money">
-        <div class="guide-phone-wrap">
-          <div class="guide-phone-glow" style="background:radial-gradient(circle,rgba(240,68,56,.2) 0%,transparent 70%);"></div>
-          <div class="guide-phone-frame">
-            <div class="guide-phone-notch"></div>
-            <div class="guide-phone-screen">
-              <img ng-src="assets/screenshots/{{s.img}}" alt="{{s.label}}" />
-            </div>
-          </div>
-        </div>
-        <div class="guide-card-label">{{s.label}}</div>
-        <div class="guide-card-desc">{{s.desc}}</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- AI & MORE -->
-<section class="guide-section" ng-show="activeGuideTab === 'all' || activeGuideTab === 'more'">
-  <div class="container">
-    <div class="guide-section-header">
-      <div class="section-label">AI &amp; More</div>
-      <h2 class="section-title">The extras that make it complete</h2>
-    </div>
-    <div class="guide-grid">
-      <div class="guide-card" ng-repeat="s in guideScreens.more">
-        <div class="guide-phone-wrap">
-          <div class="guide-phone-glow" style="background:radial-gradient(circle,rgba(158,119,237,.25) 0%,transparent 70%);"></div>
-          <div class="guide-phone-frame">
-            <div class="guide-phone-notch"></div>
-            <div class="guide-phone-screen">
-              <img ng-src="assets/screenshots/{{s.img}}" alt="{{s.label}}" />
-            </div>
-          </div>
-        </div>
-        <div class="guide-card-label">{{s.label}}</div>
-        <div class="guide-card-desc">{{s.desc}}</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-banner">
-  <div class="container">
-    <div class="section-label" style="color:rgba(255,255,255,0.85); background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); margin-bottom:16px;">Free forever</div>
-    <h2 class="section-title" style="color:white;">Like what you see? Download free.</h2>
-    <p class="section-subtitle" style="color:rgba(255,255,255,0.72);">Everything you just saw — completely free, no subscription, no ads.</p>
-    <div class="cta-banner-actions">
-      <a href="#!/download" class="btn btn-ghost btn-lg">⬇ Download Free</a>
-      <a href="#!/features" class="btn btn-ghost btn-lg">See All Features →</a>
-    </div>
-  </div>
-</section>
-  </script>
-
-  <!-- App JS -->
-  <script src="app.js"></script>
+  <!-- Motion Engine & AngularJS App -->
+  <script src="motion.js?v=3"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>
