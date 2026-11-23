@@ -3687,3 +3687,27 @@ main, .footer {
   .story-lock-glow,
   .story-callout { transition: none !important; animation: none !important; }
 }
+
+
+/* ── Hero entrance (2026-11-23) ─────────────────────────────
+   The hero used the scroll-reveal classes, so it started at opacity 0
+   and only appeared after Angular + motion.js ran — visitors saw a
+   faded hero for the first moment. Now it's fully opaque from the
+   first frame and only glides into place, in pure CSS. */
+.hero-enter {
+  animation: heroGlideUp 0.7s var(--ease-out) both;
+}
+.hero-enter-stage {
+  animation: heroGlideIn 0.9s var(--ease-out) 0.05s both;
+}
+@keyframes heroGlideUp {
+  from { transform: translate3d(0, 14px, 0); }
+  to   { transform: none; }
+}
+@keyframes heroGlideIn {
+  from { transform: translate3d(0, 10px, 0) scale(0.985); }
+  to   { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter, .hero-enter-stage { animation: none; }
+}
