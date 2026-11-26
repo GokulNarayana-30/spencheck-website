@@ -49,13 +49,16 @@
   </a>
 
   <h1>Privacy Policy for Spencheck</h1>
-  <div class="meta">Effective date: November 19, 2026</div>
+  <div class="meta">Effective date: November 26, 2026</div>
   <p class="intro">Spencheck is built to work entirely on your device. This page explains exactly what data the app touches, where it's stored, and what — if anything — ever leaves your phone.</p>
+
+  <h2>SMS access (Android)</h2>
+  <p>Spencheck uses SMS permission only to detect bank and UPI transactions for your expense tracking. It does not read personal messages, does not use SMS for ads, and does not share SMS content.</p>
+  <p>On Android, Spencheck reads bank and UPI debit and credit alerts on your device. The local review history stores extracted payment details including the amount, merchant or sender, date, masked account suffix and bank reference. Trusted purchases can be saved automatically. You choose how to record incoming money. Optional backups include saved financial entries, their bank references and identifiers that prevent repeat imports. Raw SMS and pending credit reviews stay on your device. You can turn off auto-add in SMS review or revoke SMS permission in your phone’s settings.</p>
 
   <h2>What stays on your device</h2>
   <p>Everything you enter — expenses, categories, budgets, credit cards, lending records, wallets, income, savings goals, tags, subscriptions, loans, and investments — is stored locally and protected by AES-256 SQLCipher encryption. None of it is sent anywhere unless you explicitly turn on Cloud backup.</p>
   <p>Android only: by default, the app blocks screenshots, screen recording, and hides its content from the recent-apps preview, since your balances and card details are sensitive. You can turn this off from Account &gt; Security &amp; backup if you want to take a screenshot or record your screen yourself.</p>
-  <p>On Android, Spencheck reads bank and UPI debit and credit alerts on your device. The local review history stores extracted payment details including the amount, merchant or sender, date, masked account suffix and bank reference. Trusted purchases can be saved automatically. You choose how to record incoming money. Optional backups include saved financial entries, their bank references and identifiers that prevent repeat imports. Raw SMS and pending credit reviews stay on your device. You can turn off auto-add in SMS review or revoke SMS permission in your phone’s settings.</p>
   <p>Receipt scanning uses Google ML Kit's on-device text recognition — a photo you take is processed on your phone and never uploaded anywhere.</p>
   <p>Importing a bank statement (CSV or PDF, Account &gt; Import bank statement) is parsed entirely on your phone — the file itself is never uploaded anywhere, only the transactions you choose to import from it get saved to your expense history.</p>
   <p>Android only: to show which UPI apps you have installed for the "Pay via UPI" picker, the app checks your device's installed apps for known UPI-capable ones. This check never leaves your phone.</p>
